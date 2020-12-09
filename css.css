@@ -107,15 +107,15 @@ button {
     border-radius: 100px 500px / 100px 50px;
     background-color: #565c61;
     border: 10px solid red;
-
 }
-.centrer{
-    float:left;
+
+.centrer {
+    float: left;
     height: 300px;
-    width:270px;
-    margin-top:25px;
-    margin-left:230px;
-    background-color:#FF3366;
+    width: 270px;
+    margin-top: 25px;
+    margin-left: 230px;
+    background-color: #FF3366;
     font-size: 20px;
     text-align: center;
     border-color: blue;
@@ -124,32 +124,78 @@ button {
     animation: random 15s infinite;
 }
 
-
 #myDIV {
-
-    background-color:blueviolet;
+    background-color: blueviolet;
     animation: mymove 5s infinite;
-  }
-  
-  @keyframes mymove {
-    10% {color: red;}
-    20% {color: blue;}
-    30%{color: yellow;}
-    40%{color: violet;}
-    50%{color: tomato;}
-    
+}
 
-  }
+@keyframes mymove {
+    10% {
+        color: red;
+    }
+    20% {
+        color: blue;
+    }
+    30% {
+        color: yellow;
+    }
+    40% {
+        color: violet;
+    }
+    50% {
+        color: tomato;
+    }
+}
 
-  .fun-color {
+.fun-color {
     -webkit-animation: random 15s infinite;
     animation: random 15s infinite;
+}
+
+@keyframes random {
+    15% {
+        background-color: #e3ff87;
     }
-    
-    @keyframes random {
-    15% { background-color: #e3ff87; } 
-    30% { background-color: #ff7c96; } 
-    45% { background-color: #6ffffa; }
-    60% { background-color: #ef6b30; }
-    75% { background-color: #bf69b1; } 
+    30% {
+        background-color: #ff7c96;
     }
+    45% {
+        background-color: #6ffffa;
+    }
+    60% {
+        background-color: #ef6b30;
+    }
+    75% {
+        background-color: #bf69b1;
+    }
+}
+
+.centrercontatact {
+    float: left;
+    height: 320px;
+    width: 270px;
+    position: fixed;
+    top: 80px;
+    right: 420px;
+    /*margin-top:25px;
+        margin-left:25px;*/
+    font-size: 20px;
+    -webkit-animation: random 15s infinite;
+    animation: random 15s infinite;
+}
+
+textarea {
+    resize: both;
+    min-width: 500px;
+    min-height: 100px;
+    max-width: 500px;
+    max-height: 100px;
+}
+
+.test {
+    height: 50px;
+    width: 50px;
+    position: fixed;
+    bottom: 215px;
+    right: 670px;
+}
