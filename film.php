@@ -5,17 +5,18 @@
 
         public function __construct()
         {
-            $this->_bdd = new PDO('mysql:host=localhost; dbname=film; charset=utf8', 'root', '');
+            $this->_bdd = new PDO('mysql:host=192.168.65.227; dbname=film; charset=utf8', 'kiki', 'kiki');
         }
 
         public function displayFilm()
         {
-            $request = $this->_bdd->query("SELECT * FROM film");
+            $request = $this->_bdd->query("SELECT nom, imgSource FROM film");
 
             while($data = $request->fetch())
             {
-                echo $data['nom'];
-                echo $data['img'];
+                echo "<p>".$data['nom']."</p>";
+                echo "<img src = ".$data['imgSource'].">";
+                
             }
         }
 
