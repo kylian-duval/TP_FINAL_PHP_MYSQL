@@ -12,10 +12,10 @@
 <body class="fun-color">
     <div class="bienvenu">
         <div class="centrer" id='myDIV'>
-            <form action="" method="post">
+            <form action="" method="POST">
                 <p>
                     <span>Nom d'utilisateur :</span>
-                    <input type="text" name="login" placeholder="Nom d'utilisateur" required>
+                    <input type="text" name="LOGIN" placeholder="Nom d'utilisateur" required>
                 </p>
                 <p>
                     <span>Crée votre mot de passe:</span>
@@ -30,5 +30,19 @@
         </div>
     </div>
 </body>
+<?php 
 
+    if(isset($_POST['MDP']) && isset($_POST['CONFMDP']))
+    {
+        if ($_POST['MDP'] != $_POST['CONFMDP'])
+        {
+            echo "les deux mots de passe ne correspondent pas";
+        }
+        else
+        {
+            verifUser();
+        }
+    }
+    
+?>
 </html>
