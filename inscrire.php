@@ -15,17 +15,17 @@
             <form action="" method="post">
                 <p>
                     <span>Nom d'utilisateur :</span>
-                    <input type="text" name="login" placeholder="Nom d'utilisateur">
+                    <input type="text" name="login" placeholder="Nom d'utilisateur" required>
                 </p>
                 <p>
                     <span>Crée votre mot de passe:</span>
-                    <input type="password" name="MDP" placeholder="Crée mots de passe">
+                    <input type="password" name="MDP" placeholder="Crée mots de passe" required>
                 </p>
                 <p>
                     <span>Confirmer votre mot de passe :</span>
-                    <input type="password" name="CONFMDP" placeholder="confirmer votre mots de passe">
+                    <input type="password" name="CONFMDP" placeholder="confirmer votre mots de passe" required>
                 </p>
-                <p><input type="submit" value="S'inscrire"/> <INPUT TYPE="BUTTON" VALUE=" Retour " onclick="window.location.href = 'index.php';"></p>
+                <p><input type="submit" value="S'inscrire"/> <INPUT TYPE="BUTTON" VALUE="Retour" onclick="window.location.href = 'index.php';"></p>
             </form>
         </div>
     </div>

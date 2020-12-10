@@ -11,7 +11,7 @@
 
 <body class="fun-color">
     <div class="bienvenu">
-        <table align=center border="10" class="centrercontatact" id='myDIV'>
+        <table align=center border="10" class="centrercontatact" id="myDIV">
             <form action="" method="post">
                 <tr>
                     <th>
@@ -29,7 +29,7 @@
                     <th>
                         <div><span>votre messege:</span></div>
                         <div><textarea id="msg" name="user_message" type="text" style="height:80px;" id="formulaire.txt" name="formulaire.txt" required minlength="0" maxlength="3000" size="1000"></textarea></div>
-                        <div class="test"><input type="submit" value="envoyer" /></div>
+                        <div class="boutonenoyer"><input type="submit" value="envoyer" /></div>
                     </th>
                 </tr>
             </form>
