@@ -39,7 +39,7 @@ function menuco()
             </div>
         </nav>
 <?php }
-    $nom = 'admin';
+    /*$nom = 'admin';
     $password = 'admin';
     if (isset($_POST['valide'])) {
         if ($_POST['login'] == $nom) {
@@ -48,13 +48,21 @@ function menuco()
             } else echo 'le mot de passe est incorrect. ';
         } else echo 'le login est inconnu. ';
         echo '<meta http-equiv="refresh" content="0">';
-    }
+    }*/
 
     if (isset($_POST['deco'])) {
         session_destroy();
         echo '<meta http-equiv="refresh" content="0">';
     }
+
+    if (isset($_POST['valide'])){
+    connection();
+
+    }
+
 }
+
+
 function inscription($identifiant, $password)
 {
 
@@ -80,5 +88,49 @@ function verifUser()
         
     }
 }
+function connection(){
 
+
+    /*//  Récupération de l'utilisateur et de son pass hashé
+    $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+    $req = $BDD->prepare('SELECT `id_user`, `password` FROM user WHERE `identifiant` = `identifiant`');
+    $req->execute(array(
+        'identifiant' => '$identifiant'));
+    $resultat = $req->fetch();
+    
+    // Comparaison du pass envoyé via le formulaire avec la base
+    $isPasswordCorrect = password_verify($_POST['mdp'], $resultat['password']);
+    
+    if (!$resultat)
+    {
+        echo 'Mauvais identifiant ou mot de passe !';
+    }
+    else
+    {
+        if (!$isPasswordCorrect) {
+            $_SESSION['login'] = $_POST['login'];
+            echo 'Vous êtes connecté !';
+        }
+        else {
+            echo 'Mauvais identifiant ou mot de passe !';
+        }
+    }*/
+//header("Location: menuprincipal.php");
+    try{
+        if(isset($_POST['valide'])){
+            
+$MaBase = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+$ResultatDeRequeteBrut = $MaBase->query("SELECT * FROM `user` WHERE `identifiant `='".$_POST['login']."' AND `password` = '".$_POST['mdp']."'");
+            if($ResultatDeRequeteBrut['identifiant'] == $_POST['login'] && $ResultatDeRequeteBrut['password'] == $_POST['mdp']){
+                $_SESSION["login"] = true;
+            }else{
+                echo "Le mot de passe ou le nom d'utilisateur est incorect";
+            };
+        }
+    }catch(Exception $e){
+        echo "J'ai eu un problème erreur :".$e->getMessage();
+    }
+
+
+}
 ?>
