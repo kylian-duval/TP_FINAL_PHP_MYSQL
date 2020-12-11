@@ -10,8 +10,10 @@ function menuco()
                 <ul>
                     <li><a href="#">Acceuil</a></li>
                     <li><a href="contact.php">Contact</a></li>
-                    <li><a href="film.php">FILM</a></li>
+                    <li><a href="#">FILM</a></li>
+<?php if($_SESSION['admin'] = true ){?>
                     <li><a href="admin.php">ADMIN</a></li>
+                <?php }  echo $_SESSION['admin'] ?>
                     <form action="" method="post">
                         <!--<li><input type="submit" name="deco" value="Déconection" /></li>-->
                         <div class=""><input type="submit" name="deco" value="Déconection" /></div>
@@ -126,7 +128,7 @@ function connection()
     } catch (Exception $e) {
         echo "J'ai eu un problème erreur :" . $e->getMessage();
     }*/
-    $BDD = new PDO('mysql:host=localhost; dbname=film;charset=utf8', 'kiki', 'kiki');
+    $BDD = new PDO('mysql:host=localhost; dbname=film; charset=utf8', 'root', '');
     if(isset($_POST['valide'])){
         if(!empty($_POST['login']) AND !empty($_POST['mdp'])){
             $requser = $BDD->prepare("SELECT * FROM user WHERE identifiant = ? AND password = ?");
@@ -134,10 +136,18 @@ function connection()
             $userexist = $requser->rowCount();
             if($userexist ==1){
                $userexist = $requser -> fetch();
-               $_SESSION['']
+               $_SESSION['login'] = $userexist['identifiant'];
+               $_SESSION['mdp'] = $userexist['password'];
+               $_SESSION['admin'] = $userexist['ADMIN'];
+               echo '<meta http-equiv="refresh" content="0">';
+
+            }else{
+                echo "Mauvais mail ou mot de passe !";
             }
             
-
+             	 	 
+        }else{
+            echo "Tous les champs doivent être complétés !";
         }
 
 
