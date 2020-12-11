@@ -121,7 +121,7 @@ function connection(){
             
 $MaBase = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
 $ResultatDeRequeteBrut = $MaBase->query("SELECT * FROM `user` WHERE `identifiant `='".$_POST['login']."' AND `password` = '".$_POST['mdp']."'");
-            if($ResultatDeRequeteBrut['identifiant'] == $_POST['login'] && $ResultatDeRequeteBrut['password'] == $_POST['mdp']){
+if($ResultatDeRequeteBrut->fetch()){
                 $_SESSION["login"] = true;
             }else{
                 echo "Le mot de passe ou le nom d'utilisateur est incorect";
@@ -132,5 +132,18 @@ $ResultatDeRequeteBrut = $MaBase->query("SELECT * FROM `user` WHERE `identifiant
     }
 
 
+}
+
+function connectionbdd(){
+
+    $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+
+}
+
+function contact($nom, $prénom, $mail, $message)
+{
+    $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+    $roquette = ("INSERT INTO `Contact`(`nom`, `prénom`, `mail`,`message`) VALUES ('$nom','$prénom','$mail','$message') ");
+    $BDD->query("$roquette");
 }
 ?>

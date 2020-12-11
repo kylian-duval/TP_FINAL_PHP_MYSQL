@@ -28,13 +28,20 @@
                 <tr>
                     <th>
                         <div><span>votre messege:</span></div>
-                        <div><textarea id="msg" name="user_message" type="text" style="height:80px;" id="formulaire.txt" name="formulaire.txt" required minlength="0" maxlength="3000" size="1000"></textarea></div>
-                        <div class="boutonenoyer"><input type="submit" value="envoyer" /></div>
+                        <div><textarea id="msg" name="user_message" type="text" style="height:80px;" id="formulaire.txt" name="formulaire.txt" required minlength="0" maxlength="1000" size="1000"></textarea></div>
+                        <div class="boutonenoyer"><input type="submit" name="envoyer" value="envoyer" /></div>
                     </th>
                 </tr>
             </form>
         </table>
     </div>
 </body>
+<?php        
+if(isset($_POST['envoyer'])){
 
+    contact($_POST['Nom'], $_POST['Prénom'],$_POST['mail'], $_POST['user_message']);
+}
+
+
+?>
 </html>
