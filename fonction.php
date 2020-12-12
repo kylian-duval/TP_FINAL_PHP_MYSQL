@@ -11,9 +11,9 @@ function menuco()
                     <li><a href="#">Acceuil</a></li>
                     <li><a href="contact.php">Contact</a></li>
                     <li><a href="#">FILM</a></li>
-<?php if($_SESSION['admin'] = true ){?>
-                    <li><a href="admin.php">ADMIN</a></li>
-                <?php }  echo $_SESSION['admin'] ?>
+                    <?php if ($_SESSION['ADMIN'] == 'true') { ?>
+                        <li><a href="admin.php">ADMIN</a></li>
+                    <?php } ?>
                     <form action="" method="post">
                         <!--<li><input type="submit" name="deco" value="Déconection" /></li>-->
                         <div class=""><input type="submit" name="deco" value="Déconection" /></div>
@@ -57,9 +57,28 @@ function menuco()
         echo '<meta http-equiv="refresh" content="0">';
     }
 
+    //if (isset($_POST['valide'])) {
+    //connection();
+    $BDD = new PDO('mysql:host=localhost; dbname=film; charset=utf8', 'root', '');
     if (isset($_POST['valide'])) {
-        connection();
+        if (!empty($_POST['login']) and !empty($_POST['mdp'])) {
+            $requser = $BDD->prepare("SELECT * FROM user WHERE identifiant = ? AND password = ?");
+            $requser->execute(array($_POST['login'], $_POST['mdp']));
+            $userexist = $requser->rowCount();
+            if ($userexist == 1) {
+                $userexist = $requser->fetch();
+                $_SESSION['login'] = $userexist['identifiant'];
+                $_SESSION['mdp'] = $userexist['password'];
+                $_SESSION['ADMIN'] = $userexist['ADMIN'];
+                echo '<meta http-equiv="refresh" content="0">';
+            } else {
+                echo "Mauvais mail ou mot de passe !";
+            }
+        } else {
+            echo "Tous les champs doivent être complétés !";
+        }
     }
+    //}
 }
 
 
@@ -129,32 +148,25 @@ function connection()
         echo "J'ai eu un problème erreur :" . $e->getMessage();
     }*/
     $BDD = new PDO('mysql:host=localhost; dbname=film; charset=utf8', 'root', '');
-    if(isset($_POST['valide'])){
-        if(!empty($_POST['login']) AND !empty($_POST['mdp'])){
+    if (isset($_POST['valide'])) {
+        if (!empty($_POST['login']) and !empty($_POST['mdp'])) {
             $requser = $BDD->prepare("SELECT * FROM user WHERE identifiant = ? AND password = ?");
-            $requser ->execute(array($_POST['login'], $_POST['mdp']));
+            $requser->execute(array($_POST['login'], $_POST['mdp']));
             $userexist = $requser->rowCount();
-            if($userexist ==1){
-               $userexist = $requser -> fetch();
-               $_SESSION['login'] = $userexist['identifiant'];
-               $_SESSION['mdp'] = $userexist['password'];
-               $_SESSION['admin'] = $userexist['ADMIN'];
-               echo '<meta http-equiv="refresh" content="0">';
-
-            }else{
+            if ($userexist == 1) {
+                $userexist = $requser->fetch();
+                $_SESSION['login'] = $userexist['identifiant'];
+                $_SESSION['mdp'] = $userexist['password'];
+                $_SESSION['admin'] = $userexist['ADMIN'];
+                $admin = $_SESSION['admin'];
+                echo '<meta http-equiv="refresh" content="0">';
+            } else {
                 echo "Mauvais mail ou mot de passe !";
             }
-            
-             	 	 
-        }else{
+        } else {
             echo "Tous les champs doivent être complétés !";
         }
-
-
-
-
     }
-    
 }
 
 function connectionbdd()
