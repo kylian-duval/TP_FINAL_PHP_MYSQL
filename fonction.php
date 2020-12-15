@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="css.css">
 <?php session_start();
+$BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
 function menuco()
 {
     if (isset($_SESSION['login'])) {
@@ -8,7 +9,7 @@ function menuco()
         <nav>
             <div class='test'>
                 <ul>
-                    <li><a href="#">Acceuil</a></li>
+                    <li><a href="index.php">Acceuil</a></li>
                     <li><a href="contact.php">Contact</a></li>
                     <li><a href="#">FILM</a></li>
                     <?php if ($_SESSION['ADMIN'] == 'true') { ?>
@@ -25,7 +26,7 @@ function menuco()
         <nav>
             <div class='test'>
                 <ul>
-                    <li><a href="#">Acceuil</a></li>
+                    <li><a href="index.php">Acceuil</a></li>
                     <li><a href="film.php">FILM</a></li>
                     <form action="" method="post">
                         <li>
@@ -40,7 +41,7 @@ function menuco()
                 </ul>
             </div>
         </nav>
-<?php }
+    <?php }
     /*$nom = 'admin';
     $password = 'admin';
     if (isset($_POST['valide'])) {
@@ -59,7 +60,7 @@ function menuco()
 
     //if (isset($_POST['valide'])) {
     //connection();
-    $BDD = new PDO('mysql:host=localhost; dbname=film; charset=utf8', 'root', '');
+    $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
     if (isset($_POST['valide'])) {
         if (!empty($_POST['login']) and !empty($_POST['mdp'])) {
             $requser = $BDD->prepare("SELECT * FROM user WHERE identifiant = ? AND password = ?");
@@ -67,6 +68,7 @@ function menuco()
             $userexist = $requser->rowCount();
             if ($userexist == 1) {
                 $userexist = $requser->fetch();
+                $_SESSION['id_user']= $userexist['id_user'];
                 $_SESSION['login'] = $userexist['identifiant'];
                 $_SESSION['mdp'] = $userexist['password'];
                 $_SESSION['ADMIN'] = $userexist['ADMIN'];
@@ -106,48 +108,7 @@ function verifUser()
 }
 function connection()
 {
-
-
-    /*//  Récupération de l'utilisateur et de son pass hashé
     $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
-    $req = $BDD->prepare('SELECT `id_user`, `password` FROM user WHERE `identifiant` = `identifiant`');
-    $req->execute(array(
-        'identifiant' => '$identifiant'));
-    $resultat = $req->fetch();
-    
-    // Comparaison du pass envoyé via le formulaire avec la base
-    $isPasswordCorrect = password_verify($_POST['mdp'], $resultat['password']);
-    
-    if (!$resultat)
-    {
-        echo 'Mauvais identifiant ou mot de passe !';
-    }
-    else
-    {
-        if (!$isPasswordCorrect) {
-            $_SESSION['login'] = $_POST['login'];
-            echo 'Vous êtes connecté !';
-        }
-        else {
-            echo 'Mauvais identifiant ou mot de passe !';
-        }
-    }*/
-    //header("Location: menuprincipal.php");
-    /*try {
-        if (isset($_POST['valide'])) {
-
-            $MaBase = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
-            $ResultatDeRequeteBrut = $MaBase->query("SELECT * FROM `user` WHERE `identifiant `='" . $_POST['login'] . "' AND `password` = '" . $_POST['mdp'] . "'");
-            if ($ResultatDeRequeteBrut->fetch()) {
-                $_SESSION["login"] = true;
-            } else {
-                echo "Le mot de passe ou le nom d'utilisateur est incorect";
-            };
-        }
-    } catch (Exception $e) {
-        echo "J'ai eu un problème erreur :" . $e->getMessage();
-    }*/
-    $BDD = new PDO('mysql:host=localhost; dbname=film; charset=utf8', 'root', '');
     if (isset($_POST['valide'])) {
         if (!empty($_POST['login']) and !empty($_POST['mdp'])) {
             $requser = $BDD->prepare("SELECT * FROM user WHERE identifiant = ? AND password = ?");
@@ -173,6 +134,7 @@ function connectionbdd()
 {
 
     $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+    return $BDD;
 }
 
 function contact($nom, $prénom, $mail, $message)
@@ -181,4 +143,53 @@ function contact($nom, $prénom, $mail, $message)
     $roquette = ("INSERT INTO `Contact`(`nom`, `prénom`, `mail`,`message`) VALUES ('$nom','$prénom','$mail','$message') ");
     $BDD->query("$roquette");
 }
+
+/*function afficheUser()
+{
+    $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+    $request = $BDD->query("SELECT * FROM `user` WHERE 1");
+   ?>
+    <form action="" method="post">
+
+    <?php
+    while ($data = $request->fetch()) {
+        echo '<tr>';
+        echo "<td>" . $data['id_user'] . "</td>";
+        echo "<td>" . $data['identifiant'] . "</td>";
+        echo "<td>" . $data['password'] . "</td>"; ?>
+        <td><input type="checkbox" id="Med_<?php $data['id_user'] ?>" name="id_users[]" value="<?php $data['id_user'] ?>"></td>
+<?php
+    //TTRAITEMENT SUPPRESSION
+    if (isset($_POST['supp'])) {
+
+        //NE PAS METTRE []
+        foreach ($_POST["id_users"] as $check) {
+            if (!isset($checkoptions)) {
+                $checkoptions = $check;
+            } else {
+                $checkoptions .= "," . $check;
+            }
+        }
+
+        echo  "DELETE FROM `User` WHERE Id IN(" . $checkoptions . ")";
+    }
+
+    ?>
+    <input type="submit" name="supp" value="suppre ca" />
+</form>
+
+<?php
+}*/
+function AfficheFilm()
+{
+
+    $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+    $request = $BDD->query("SELECT nom, imgSource FROM film");
+
+    while ($data = $request->fetch()) {
+        echo "<p>" . $data['nom'] . "</p>";
+        echo "<img src = " . $data['imgSource'] . ">";
+    }
+}
+
 ?>

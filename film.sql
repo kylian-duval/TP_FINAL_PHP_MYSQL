@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : ven. 11 déc. 2020 à 13:51
+-- Généré le : mar. 15 déc. 2020 à 22:47
 -- Version du serveur :  10.1.47-MariaDB-0+deb9u1
 -- Version de PHP : 7.0.33-0+deb9u10
 
@@ -49,6 +49,13 @@ CREATE TABLE `film` (
   `auteur` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `film`
+--
+
+INSERT INTO `film` (`id_film`, `nom`, `imgSource`, `auteur`) VALUES
+(3, 'test', 'https://i.pinimg.com/originals/c5/2f/c9/c52fc99b6fecac8e6bc20a8ccc83a7e1.jpg', 'kiki');
+
 -- --------------------------------------------------------
 
 --
@@ -67,8 +74,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `identifiant`, `password`, `ADMIN`) VALUES
-(28, 'admin', 'admin', 'true'),
-(27, 'kiki', '123', 'false');
+(36, 'kiki', 'kiki', 'false'),
+(37, 'admin', 'admin', 'false');
 
 -- --------------------------------------------------------
 
@@ -78,8 +85,8 @@ INSERT INTO `user` (`id_user`, `identifiant`, `password`, `ADMIN`) VALUES
 
 CREATE TABLE `vote` (
   `id_vote` int(11) NOT NULL,
-  `nom` varchar(50) NOT NULL,
-  `quantite` int(11) NOT NULL
+  `id_user` varchar(50) NOT NULL,
+  `id_film` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -124,13 +131,13 @@ ALTER TABLE `Contact`
 -- AUTO_INCREMENT pour la table `film`
 --
 ALTER TABLE `film`
-  MODIFY `id_film` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_film` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT pour la table `vote`

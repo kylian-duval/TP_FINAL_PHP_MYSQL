@@ -1,58 +1,72 @@
 <!DOCTYPE html>
-<html>
+<?php
+
+use function PHPSTORM_META\elementType;
+
+include 'fonction.php' ?>
+
+<html lang="fr">
 
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Table</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 
 <body>
-    <a href="index.php">Revenir Au Crud Medecin</a>
+
     <?php
-    //on va récupérer l'id du Medecin via méthode Get
-    //pour afficher cette page <a href="Medecin.php?idMedecin=id">Medecin N° id<a>
-    // remplacer id par le vrai id de la clé primaire
-    $IdMedecin = null;
-    if (!isset($_GET['IdMedecin'])) {
-        echo "<h1> Il n'y a pas de Medecin à afficher </h1>";
-    } else {
-        $IdMedecin = $_GET['IdMedecin'];
-        //Récupération des données du Medecin N° IdMedecin
-        // Variable utilise pour la connexion à la bdd
-        $ipServerSQL = "192.168.65.132";
-        $NomBase = "Clinique";
-        $UserBDD = "SiteWeb";
-        $PassBDD = "SiteWeb";
-        $BasePDO = null;
-        //Etape 2 Connexion à la bdd avec PDO si $Crud != 0;
-        //PDO attend une ip de MySQL , le nom de la base , un user avec son mot de pass qui as les privilèges sur cette base
-        try {
-            $BasePDO = new PDO(
-                "mysql:host=" . $ipServerSQL . ";dbname=" . $NomBase . ";port=3306",
-                $UserBDD,
-                $PassBDD
-            );
-            if ($BasePDO) {
-                $req = "SELECT * FROM MEDECIN WHERE IdMedecin='" . $IdMedecin . "'";
-                $RequetStatement = $BasePDO->query($req);
-                if ($RequetStatement) {
-                    $Tab = $RequetStatement->fetch();
-    ?>
-                    <h1>Voici la page template des données de Medecin</h1>
-                    <p>Nom : <?php echo $Tab['Nom']; ?> </p>
-                    <p>Prenom : <?php echo $Tab['Prenom']; ?> </p>
-    <?php
+    menuco();
+
+    $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+    $request = $BDD->query("SELECT * FROM `user` WHERE 1"); ?>
+    <form action="" method="post">
+        <table>
+            <?php
+            while ($tab = $request->fetch()) { ?>
+                <tr>
+                    <td><span> <?php  echo $tab['id_user'] ?> </span> </td>
+                    <td> <?php echo $tab['identifiant'] ?> </td>
+                    <td> <?php echo $tab['password'] ?> </td>
+                    <td><input  type="checkbox" id="<?php echo $tab["id_user"] ?>" name="id_user[]" value="<?php echo $tab["id_user"] ?>"></td>
+                </tr>
+            <?php } ?>
+        </table>
+        <!-- echo '<p>id_user mots_de_passe ';
+        while ($tab = $request->fetch()) {
+            echo '<p>' . $tab["id_user"] . ' ' . $tab["identifiant"] .'';
+
+        ?>
+
+            <input type="checkbox" id="<?php // echo $tab["id_user"] 
+                                        ?>" name="id_user[]" value="<?php //echo $tab["id_user"] 
+                                                                                                    ?>"> -->
+
+
+        <?php
+
+        //echo "</p>";
+        //} 
+
+        //TTRAITEMENT SUPPRESSION
+        if (isset($_POST['supp'])) {
+
+            //NE PAS METTRE []
+            foreach ($_POST["id_user"] as $check) {
+                if (!isset($checkoptions)) {
+                    $checkoptions = $check;
+                } else {
+                    $checkoptions .= "," . $check;
                 }
             }
-        } catch (Exception $e) {
-            echo $e->getMessage();
+
+            $BDD->query("DELETE FROM `user` WHERE id_user IN(" . $checkoptions . ")");
+            echo '<meta http-equiv="refresh" content="0">';
         }
-    }
-    ?>
+
+        ?>
+        <input type="submit" name="supp" value="suppre ca" />
+    </form>
 </body>
 
 </html>

@@ -1,5 +1,6 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -7,7 +8,6 @@
     <link rel="stylesheet" href="css.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php include "fonction.php";
-    //include('film.php');
     ?>
 </head>
 
@@ -16,11 +16,9 @@
     <div class="conteneur">
         <p>Du contenu sous le menu</p>
 
-    <!--<?php 
-        $film = new film();
-
-        $film->displayFilm();
-    ?>-->
+        <?php
+        AfficheFilm();
+        ?>
 
     </div>
 
