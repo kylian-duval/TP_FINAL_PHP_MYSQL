@@ -12,7 +12,9 @@ function menuco()
                     <li><a href="index.php">Acceuil</a></li>
                     <li><a href="contact.php">Contact</a></li>
                     <li><a href="#">FILM</a></li>
+                    <li><a href="mon_compte.php">mon compte</a></li>
                     <?php if ($_SESSION['ADMIN'] == 'true') { ?>
+                        <li><a href="message.php">BOÎDE DE RECEPTION</a></li>
                         <li><a href="admin.php">ADMIN</a></li>
                     <?php } ?>
                     <form action="" method="post">
