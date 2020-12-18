@@ -7,17 +7,17 @@
     <title>Document</title>
     <link rel="stylesheet" href="css.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <?php include "fonction.php";
+    <?php include "fonction.php"; connectionbdd();
     ?>
 </head>
 
 <body>
-    <?php menuco(); ?>
+    <?php menuco($BDD); ?>
     <div class="conteneur">
         <p>Du contenu sous le menu</p>
 
         <?php
-        AfficheFilm();
+        AfficheFilm($BDD);
         ?>
 
     </div>

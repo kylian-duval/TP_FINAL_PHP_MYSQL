@@ -4,15 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css.css">
     <title>mon espace</title>
-    <?php include 'fonction.php' ?>
+    <?php include 'fonction.php'; connectionbdd(); ?>
 </head>
 
 <body>
+    <?php menuco($BDD); ?>
     <form action="" method="POST">
         <?php
 
-        $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+        //$BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
 
         if (isset($_POST['SuppUser'])) {
 

@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="css.css">
 <?php session_start();
 $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
-function menuco()
+function menuco($BDD)
 {
     if (isset($_SESSION['login'])) {
 
@@ -70,7 +70,7 @@ function menuco()
             $userexist = $requser->rowCount();
             if ($userexist == 1) {
                 $userexist = $requser->fetch();
-                $_SESSION['id_user']= $userexist['id_user'];
+                $_SESSION['id_user'] = $userexist['id_user'];
                 $_SESSION['login'] = $userexist['identifiant'];
                 $_SESSION['mdp'] = $userexist['password'];
                 $_SESSION['ADMIN'] = $userexist['ADMIN'];
@@ -86,16 +86,16 @@ function menuco()
 }
 
 
-function inscription($identifiant, $password)
+function inscription($identifiant, $password, $BDD)
 {
 
-    $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+    //$BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
     $roquette = ("INSERT INTO `user`(`identifiant`, `password`, `ADMIN`) VALUES ('$identifiant','$password','false') ");
 
     $BDD->query("$roquette");
 }
 
-function verifUser()
+function verifUser($BDD)
 {
     $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
     $requeteMail = $BDD->prepare("SELECT * FROM user WHERE identifiant = ?");
@@ -103,14 +103,14 @@ function verifUser()
     $userExist = $requeteMail->rowCount();
     if ($userExist != 1) {
         echo "bien connecte";
-        inscription($_POST['LOGIN'], $_POST['CONFMDP']);
+        inscription($_POST['LOGIN'], $_POST['CONFMDP'], $BDD);
     } else {
         echo "il y a deja un user";
     }
 }
-function connection()
+function connection($BDD)
 {
-    $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+    //$BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
     if (isset($_POST['valide'])) {
         if (!empty($_POST['login']) and !empty($_POST['mdp'])) {
             $requser = $BDD->prepare("SELECT * FROM user WHERE identifiant = ? AND password = ?");
@@ -139,9 +139,9 @@ function connectionbdd()
     return $BDD;
 }
 
-function contact($nom, $prénom, $mail, $message)
+function contact($nom, $prénom, $mail, $message, $BDD)
 {
-    $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+    //$BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
     $roquette = ("INSERT INTO `Contact`(`nom`, `prénom`, `mail`,`message`) VALUES ('$nom','$prénom','$mail','$message') ");
     $BDD->query("$roquette");
 }
@@ -182,16 +182,26 @@ function contact($nom, $prénom, $mail, $message)
 
 <?php
 }*/
-function AfficheFilm()
+function AfficheFilm($BDD)
 {
 
-    $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+    //$BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
     $request = $BDD->query("SELECT nom, imgSource FROM film");
 
-    while ($data = $request->fetch()) {
-        echo "<p>" . $data['nom'] . "</p>";
-        echo "<img src = " . $data['imgSource'] . ">";
-    }
-}
+    while ($data = $request->fetch()) { ?>
+        <table border="2">
+            <tr>
+                <td align= center> <?php echo $data['nom'] ?> </td>
+            </tr>
+            <tr>
+                <td>
+                    <div> <img src="<?php echo $data['imgSource']; ?>"> </div>
+                </td>
+            </tr>
+        </table>
 
+<?php }
+}
+//echo "<p>" . $data['nom'] . "</p>";
+//echo "<img src = " . $data['imgSource'] . ">";
 ?>

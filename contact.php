@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css.css">
-    <?php include "fonction.php" ?>
+    <?php include "fonction.php"; connectionbdd(); ?>
 </head>
 
 <body class="fun-color">
+    <?php menuco($BDD); ?>
     <div class="bienvenu">
         <table align=center border="10" class="centrercontatact" id="myDIV">
             <form action="" method="post">
@@ -39,7 +40,7 @@
 <?php        
 if(isset($_POST['envoyer'])){
 
-    contact($_POST['Nom'], $_POST['Prénom'],$_POST['mail'], $_POST['user_message']);
+    contact($_POST['Nom'], $_POST['Prénom'],$_POST['mail'], $_POST['user_message'], $BDD);
 }
 
 
