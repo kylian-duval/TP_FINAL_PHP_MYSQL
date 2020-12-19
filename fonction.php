@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="css.css">
 <?php session_start();
-$BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+$BDD = new PDO('mysql:host=localhost; dbname=film; charset=utf8', 'root', '');
 function menuco($BDD)
 {
     if (isset($_SESSION['login'])) {
@@ -61,8 +61,8 @@ function menuco($BDD)
     }
 
     //if (isset($_POST['valide'])) {
-    //connection();
-    $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+    connectionbdd();
+    //$BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
     if (isset($_POST['valide'])) {
         if (!empty($_POST['login']) and !empty($_POST['mdp'])) {
             $requser = $BDD->prepare("SELECT * FROM user WHERE identifiant = ? AND password = ?");
@@ -74,6 +74,7 @@ function menuco($BDD)
                 $_SESSION['login'] = $userexist['identifiant'];
                 $_SESSION['mdp'] = $userexist['password'];
                 $_SESSION['ADMIN'] = $userexist['ADMIN'];
+                $_SESSION['vote'] = $userexist['vote'];
                 echo '<meta http-equiv="refresh" content="0">';
             } else {
                 echo "Mauvais mail ou mot de passe !";
@@ -135,7 +136,7 @@ function connection($BDD)
 function connectionbdd()
 {
 
-    $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+    $BDD = new PDO('mysql:host=localhost; dbname=film; charset=utf8', 'root', '');
     return $BDD;
 }
 

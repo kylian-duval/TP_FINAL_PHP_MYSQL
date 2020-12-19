@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <?php
 
-use function PHPSTORM_META\elementType;
 
 include 'fonction.php'; connectionbdd();?>
 
@@ -18,7 +17,7 @@ include 'fonction.php'; connectionbdd();?>
     <?php
     menuco($BDD);
 
-    $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+    //$BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
     $request = $BDD->query("SELECT * FROM `user` WHERE 1"); ?>
     <form action="" method="post">
         <table border="2">
