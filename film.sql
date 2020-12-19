@@ -1,40 +1,39 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.7
--- https://www.phpmyadmin.net/
+-- version 4.1.4
+-- http://www.phpmyadmin.net
 --
--- Hôte : localhost
--- Généré le : mar. 15 déc. 2020 à 22:47
--- Version du serveur :  10.1.47-MariaDB-0+deb9u1
--- Version de PHP : 7.0.33-0+deb9u10
+-- Client :  127.0.0.1
+-- Généré le :  Sam 19 Décembre 2020 à 16:46
+-- Version du serveur :  5.6.15-log
+-- Version de PHP :  5.4.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Base de données : `film`
+-- Base de données :  `film`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Contact`
+-- Structure de la table `contact`
 --
 
-CREATE TABLE `Contact` (
-  `id_Contact` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `contact` (
+  `id_Contact` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
   `prénom` varchar(50) NOT NULL,
   `mail` varchar(50) NOT NULL,
-  `message` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `message` text NOT NULL,
+  PRIMARY KEY (`id_Contact`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -42,19 +41,21 @@ CREATE TABLE `Contact` (
 -- Structure de la table `film`
 --
 
-CREATE TABLE `film` (
-  `id_film` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `film` (
+  `id_film` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
   `imgSource` text NOT NULL,
-  `auteur` varchar(50) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `auteur` varchar(50) NOT NULL,
+  `nb_vote` int(11) NOT NULL,
+  PRIMARY KEY (`id_film`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Déchargement des données de la table `film`
+-- Contenu de la table `film`
 --
 
-INSERT INTO `film` (`id_film`, `nom`, `imgSource`, `auteur`) VALUES
-(3, 'test', 'https://i.pinimg.com/originals/c5/2f/c9/c52fc99b6fecac8e6bc20a8ccc83a7e1.jpg', 'kiki');
+INSERT INTO `film` (`id_film`, `nom`, `imgSource`, `auteur`, `nb_vote`) VALUES
+(3, 'test', 'https://i.pinimg.com/originals/c5/2f/c9/c52fc99b6fecac8e6bc20a8ccc83a7e1.jpg', 'kiki', 9);
 
 -- --------------------------------------------------------
 
@@ -62,20 +63,22 @@ INSERT INTO `film` (`id_film`, `nom`, `imgSource`, `auteur`) VALUES
 -- Structure de la table `user`
 --
 
-CREATE TABLE `user` (
-  `id_user` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `user` (
+  `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `identifiant` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `ADMIN` varchar(5) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `vote` varchar(3) NOT NULL,
+  `ADMIN` varchar(5) NOT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
 
 --
--- Déchargement des données de la table `user`
+-- Contenu de la table `user`
 --
 
-INSERT INTO `user` (`id_user`, `identifiant`, `password`, `ADMIN`) VALUES
-(36, 'kiki', 'kiki', 'false'),
-(37, 'admin', 'admin', 'false');
+INSERT INTO `user` (`id_user`, `identifiant`, `password`, `vote`, `ADMIN`) VALUES
+(36, 'kiki', 'kiki', 'oui', 'true'),
+(37, 'admin', 'admin', 'oui', 'true');
 
 -- --------------------------------------------------------
 
@@ -83,68 +86,28 @@ INSERT INTO `user` (`id_user`, `identifiant`, `password`, `ADMIN`) VALUES
 -- Structure de la table `vote`
 --
 
-CREATE TABLE `vote` (
-  `id_vote` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `vote` (
+  `id_vote` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` varchar(50) NOT NULL,
-  `id_film` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `id_film` int(11) NOT NULL,
+  PRIMARY KEY (`id_vote`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
--- Index pour les tables déchargées
+-- Contenu de la table `vote`
 --
 
---
--- Index pour la table `Contact`
---
-ALTER TABLE `Contact`
-  ADD PRIMARY KEY (`id_Contact`);
-
---
--- Index pour la table `film`
---
-ALTER TABLE `film`
-  ADD PRIMARY KEY (`id_film`);
-
---
--- Index pour la table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id_user`);
-
---
--- Index pour la table `vote`
---
-ALTER TABLE `vote`
-  ADD PRIMARY KEY (`id_vote`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `Contact`
---
-ALTER TABLE `Contact`
-  MODIFY `id_Contact` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT pour la table `film`
---
-ALTER TABLE `film`
-  MODIFY `id_film` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT pour la table `user`
---
-ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
-
---
--- AUTO_INCREMENT pour la table `vote`
---
-ALTER TABLE `vote`
-  MODIFY `id_vote` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
+INSERT INTO `vote` (`id_vote`, `id_user`, `id_film`) VALUES
+(20, '37', 3),
+(19, '36', 3),
+(18, '36', 3),
+(17, '37', 3),
+(16, '37', 3),
+(15, '37', 3),
+(14, '37', 3),
+(13, '37', 3),
+(12, '37', 3),
+(11, '37', 3);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
