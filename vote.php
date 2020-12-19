@@ -11,6 +11,7 @@
 
 <body>
     <?php
+     if (!$_SESSION['vote'] == 'oui') {
     //$BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
     $request = $BDD->query("SELECT `id_film`, `nom`, `imgSource` FROM `film`"); ?>
     <form action="" method="post">
@@ -37,7 +38,8 @@
             </table>
 
         <?php
-        } ?>
+        } 
+    }?>
 
         <?php
 
@@ -58,7 +60,7 @@
 
         if ($_SESSION['vote'] == 'oui') {
         ?>
-
+<h1>vous avais voter voici les résulta des vote actuelle</h1>
             <table border="2">
                 <?php $request = $BDD->query("SELECT `nom`, `nb_vote` FROM `film`");
                 while ($data = $request->fetch()) { ?>
