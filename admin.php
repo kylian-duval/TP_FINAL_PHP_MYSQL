@@ -2,7 +2,8 @@
 <?php
 
 
-include 'fonction.php'; connectionbdd();?>
+include 'fonction.php';
+connectionbdd(); ?>
 
 <html lang="fr">
 
@@ -21,12 +22,12 @@ include 'fonction.php'; connectionbdd();?>
     $request = $BDD->query("SELECT * FROM `user` WHERE 1"); ?>
     <form action="" method="post">
         <table border="2">
-        <tr>
-        <td>id_user</td>
-        <td>login</td>
-        <td>password</td>
-        <td>ADMIN</td>
-        </tr>
+            <tr>
+                <td>id_user</td>
+                <td>login</td>
+                <td>password</td>
+                <td>ADMIN</td>
+            </tr>
             <?php
             while ($tab = $request->fetch()) { ?>
                 <tr>
@@ -37,8 +38,8 @@ include 'fonction.php'; connectionbdd();?>
                     <td><input type="checkbox" id="<?php echo $tab["id_user"] ?>" name="id_user[]" value="<?php echo $tab["id_user"] ?>"></td>
                     <td><input type="submit" name="<?php echo $tab['id_user'] ?>" value="mofifier" /></td>
                 </tr>
-               <?php 
-             } ?>
+            <?php
+            } ?>
         </table>
         <!-- echo '<p>id_user mots_de_passe ';
         while ($tab = $request->fetch()) {
@@ -50,62 +51,129 @@ include 'fonction.php'; connectionbdd();?>
                                         ?>" name="id_user[]" value="<?php //echo $tab["id_user"] 
                                                                     ?>"> -->
 
-
-        <?php
-
-        //echo "</p>";
-        //} 
-
-        //TTRAITEMENT SUPPRESSION
-        if (isset($_POST['supp'])) {
-
-            //NE PAS METTRE []
-            foreach ($_POST["id_user"] as $check) {
-                if (!isset($checkoptions)) {
-                    $checkoptions = $check;
-                } else {
-                    $checkoptions .= "," . $check;
-                }
-            }
-
-            $BDD->query("DELETE FROM `user` WHERE id_user IN(" . $checkoptions . ")");
-            echo '<meta http-equiv="refresh" content="0">';
-        }
-
-        if (isset($_POST['op'])) {
-
-            //NE PAS METTRE []
-            foreach ($_POST["id_user"] as $check) {
-                if (!isset($checkoptions)) {
-                    $checkoptions = $check;
-                } else {
-                    $checkoptions .= "," . $check;
-                }
-            }
-
-            $BDD->query("UPDATE `user` SET `ADMIN`='true' WHERE id_user IN(" . $checkoptions . ")");
-            echo '<meta http-equiv="refresh" content="0">';
-        }
-        if (isset($_POST['deop'])) {
-
-            //NE PAS METTRE []
-            foreach ($_POST["id_user"] as $check) {
-                if (!isset($checkoptions)) {
-                    $checkoptions = $check;
-                } else {
-                    $checkoptions .= "," . $check;
-                }
-            }
-
-            $BDD->query("UPDATE `user` SET `ADMIN`='false' WHERE id_user IN(" . $checkoptions . ")");
-            echo '<meta http-equiv="refresh" content="0">';
-        }
-        ?>
         <input type="submit" name="op" value="admin" />
         <input type="submit" name="deop" value="retirer les droit" />
-        <input type="submit" name="supp" value="suppre ca" />
+        <input type="submit" name="suppuser" value="suppre ca" />
 
     </form>
+    <?php
+    $request = $BDD->query("SELECT * FROM `film` WHERE 1"); ?>
+    <form action="" method="post">
+        <table border="2">
+            <tr>
+                <td>id_film</td>
+                <td>nom</td>
+                <td>imgSource</td>
+                <td>auteur</td>
+                <td>nombre de vote</td>
+            </tr>
+            <?php
+            while ($tab = $request->fetch()) { ?>
+                <tr>
+                    <td><span> <?php echo $tab['id_film'] ?> </span> </td>
+                    <td> <?php echo $tab['nom'] ?> </td>
+                    <td> <?php echo $tab['imgSource'] ?> </td>
+                    <td> <?php echo $tab['auteur'] ?> </td>
+                    <td> <?php echo $tab['nb_vote'] ?> </td>
+                    <td><input type="checkbox" id="<?php echo $tab["id_user"] ?>" name="id_film[]" value="<?php echo $tab["id_film"] ?>"></td>
+                    <td><input type="submit" name="<?php echo $tab['id_user'] ?>" value="mofifier" /></td>
+                </tr>
+            <?php
+            } ?>
+        </table>
+
+        <input type="submit" name="suppfilm" value="suppre ca" />
+
+    </form>
+    <?php
+
+    //echo "</p>";
+    //} 
+
+    //TTRAITEMENT SUPPRESSION
+    if (isset($_POST['suppuser'])) {
+
+        //NE PAS METTRE []
+        foreach ($_POST["id_user"] as $check) {
+            if (!isset($checkoptions)) {
+                $checkoptions = $check;
+            } else {
+                $checkoptions .= "," . $check;
+            }
+        }
+
+        $BDD->query("DELETE FROM `user` WHERE id_user IN(" . $checkoptions . ")");
+        echo '<meta http-equiv="refresh" content="0">';
+    }
+
+    if (isset($_POST['op'])) {
+
+        //NE PAS METTRE []
+        foreach ($_POST["id_user"] as $check) {
+            if (!isset($checkoptions)) {
+                $checkoptions = $check;
+            } else {
+                $checkoptions .= "," . $check;
+            }
+        }
+
+        $BDD->query("UPDATE `user` SET `ADMIN`='true' WHERE id_user IN(" . $checkoptions . ")");
+        echo '<meta http-equiv="refresh" content="0">';
+    }
+    if (isset($_POST['deop'])) {
+
+        //NE PAS METTRE []
+        foreach ($_POST["id_user"] as $check) {
+            if (!isset($checkoptions)) {
+                $checkoptions = $check;
+            } else {
+                $checkoptions .= "," . $check;
+            }
+        }
+
+        $BDD->query("UPDATE `user` SET `ADMIN`='false' WHERE id_user IN(" . $checkoptions . ")");
+        echo '<meta http-equiv="refresh" content="0">';
+    }
+
+    if (isset($_POST['suppfilm'])) {
+
+        //NE PAS METTRE []
+        foreach ($_POST["id_film"] as $check) {
+            if (!isset($checkoptions)) {
+                $checkoptions = $check;
+            } else {
+                $checkoptions .= "," . $check;
+            }
+        }
+
+        $BDD->query("DELETE FROM `film` WHERE id_film IN(" . $checkoptions . ")");
+        echo '<meta http-equiv="refresh" content="0">';
+    }
+    ?>
+    <h1>par quelle metode vous aller vous ajouter un film ?</h1>
+    <form action="" method="POST">
+        <p><span> via lieu internet:</span> <input type="submit" name="lien" value="lien" /> <span>ou </span><span>vien uplode de fichier: </span><input type="submit" name="uplode" value="uplode" /></p>
+    </form>
+    <form action="" method="POST">
+        <?php if (isset($_POST['lien'])) { ?>
+
+            <input type="text" name="nom" placeholder="entre le nom du film" required>
+            <input type="text" name="affiche" placeholder="entre lien de l'affiche du film" required>
+            <input type="text" name="auteur" placeholder="entre l'auteur du film" required>
+            <input type="submit" name="EnvoiFilmLien" value="ajoute" />
+        <?php } ?>
+    </form>
+    <?php if (isset($_POST['EnvoiFilmLien'])) {
+        $nom = $_POST['nom'];
+        echo $nom,
+        $affiche = $_POST['affiche'];
+        $auteur = $_POST['auteur'];
+        echo $affiche;
+        echo $auteur;
+        $BDD->query("INSERT INTO `film`(`nom`, `imgSource`, `auteur`, `nb_vote`) VALUES ('$nom','$affiche','$auteur','0')");
+        echo '<meta http-equiv="refresh" content="0">';
+    } ?>
+
 </body>
 
 </html>

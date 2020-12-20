@@ -32,8 +32,8 @@ function menuco($BDD)
                     <li><a href="film.php">FILM</a></li>
                     <form action="" method="post">
                         <li>
-                            <p><input type="text" name="login" placeholder="entrée le login"> </p>
-                            <p><input type="password" name="mdp" placeholder="votre mots de passe"> </p>
+                            <p><input type="text" name="login" placeholder="entrée le login" required> </p>
+                            <p><input type="password" name="mdp" placeholder="votre mots de passe" required> </p>
                         </li>
                         <li>
                             <div class="pading"><input type="submit" name="valide" value="Connection" /></div>
