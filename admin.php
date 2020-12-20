@@ -165,15 +165,20 @@ connectionbdd(); ?>
     </form>
     <?php if (isset($_POST['EnvoiFilmLien'])) {
         $nom = $_POST['nom'];
-        echo $nom,
         $affiche = $_POST['affiche'];
         $auteur = $_POST['auteur'];
-        echo $affiche;
-        echo $auteur;
         $BDD->query("INSERT INTO `film`(`nom`, `imgSource`, `auteur`, `nb_vote`) VALUES ('$nom','$affiche','$auteur','0')");
         echo '<meta http-equiv="refresh" content="0">';
     } ?>
 
+
+    <?php if (isset($_POST['uplode'])) { ?>
+
+        <input type="text" name="nom" placeholder="entre le nom du film" required>
+        <input type="fils" name="affiche" required>
+        <input type="text" name="auteur" placeholder="entre l'auteur du film" required>
+        <input type="submit" name="EnvoiFilmLien" value="ajoute" />
+    <?php } ?>
 </body>
 
 </html>
