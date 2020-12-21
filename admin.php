@@ -171,14 +171,51 @@ connectionbdd(); ?>
         echo '<meta http-equiv="refresh" content="0">';
     } ?>
 
+    <form action="" method="POST" enctype="multipart/form-data">
+        <?php if (isset($_POST['uplode'])) { ?>
 
-    <?php if (isset($_POST['uplode'])) { ?>
+            <input type="text" name="nomUplod" placeholder="entre le nom du film" required>
+            <input type="file" name="afficheUplode" required>
+            <input type="text" name="auteurUplod" placeholder="entre l'auteur du film" required>
+            <input type="submit" name="EnvoiFilmUplode" value="ajoute" />
+        <?php } ?>
+    </form>
+    <?php
+    if(isset($_POST['EnvoiFilmUplode'])){
 
-        <input type="text" name="nom" placeholder="entre le nom du film" required>
-        <input type="fils" name="affiche" required>
-        <input type="text" name="auteur" placeholder="entre l'auteur du film" required>
-        <input type="submit" name="EnvoiFilmLien" value="ajoute" />
-    <?php } ?>
+    $maxSize = 900000;
+    $valideType = array('.jpg', '.jpeg', '.gif', '.png');
+
+    if($_FILES['afficheUplode']['error'] > 0){
+    echo "une erreur est survenue lors du transfert";
+    die;
+    }
+    $fileSize = $_FILES['afficheUplode']['size'];
+    
+    if($fileSize > $maxSize){
+        echo "les fichier est trop volumineus";
+        die;
+    }
+
+    $fileType = ".".strtolower(substr(strrchr($_FILES['afficheUplode']['name'], '.'), 1));
+
+    if(!in_array($fileType, $valideType)){
+        echo "le fichier sélectionné n'est pas une image";
+        die;
+    }
+    $tmpName = $_FILES['afficheUplode']['tmp_name'];
+    $Name = $_FILES['afficheUplode']['name'];
+    $fileName = "film/" . $Name;
+    $résultUplod = move_uploaded_file($tmpName, $fileName);
+if($résultUplod){
+    echo "transfere terminer";
+}
+        $nomUplod = $_POST['nomUplod'];
+        $auteurUplod = $_POST['auteurUplod'];
+        $BDD->query("INSERT INTO `film`(`nom`, `imgSource`, `auteur`, `nb_vote`) VALUES ('$nomUplod','$fileName','$auteurUplod','0')");
+        echo '<meta http-equiv="refresh" content="0">';
+
+    }?>
 </body>
 
 </html>
