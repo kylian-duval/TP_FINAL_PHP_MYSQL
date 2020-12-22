@@ -35,6 +35,7 @@ connectionbdd(); ?>
                     <td> <?php echo $tab['identifiant'] ?> </td>
                     <td> <?php echo $tab['password'] ?> </td>
                     <td> <?php echo $tab['ADMIN'] ?> </td>
+                    <td> <?php echo $tab['vote'] ?> </td>
                     <td><input type="checkbox" id="<?php echo $tab["id_user"] ?>" name="id_user[]" value="<?php echo $tab["id_user"] ?>"></td>
                     <td><input type="submit" name="<?php echo $tab['id_user'] ?>" value="mofifier" /></td>
                 </tr>
@@ -181,41 +182,53 @@ connectionbdd(); ?>
         <?php } ?>
     </form>
     <?php
-    if(isset($_POST['EnvoiFilmUplode'])){
+    if (isset($_POST['EnvoiFilmUplode'])) {
 
-    $maxSize = 900000;
-    $valideType = array('.jpg', '.jpeg', '.gif', '.png');
+        $maxSize = 900000;
+        $valideType = array('.jpg', '.jpeg', '.gif', '.png');
 
-    if($_FILES['afficheUplode']['error'] > 0){
-    echo "une erreur est survenue lors du transfert";
-    die;
-    }
-    $fileSize = $_FILES['afficheUplode']['size'];
-    
-    if($fileSize > $maxSize){
-        echo "les fichier est trop volumineus";
-        die;
-    }
+        if ($_FILES['afficheUplode']['error'] > 0) {
+            echo "une erreur est survenue lors du transfert";
+            die;
+        }
+        $fileSize = $_FILES['afficheUplode']['size'];
 
-    $fileType = ".".strtolower(substr(strrchr($_FILES['afficheUplode']['name'], '.'), 1));
+        if ($fileSize > $maxSize) {
+            echo "les fichier est trop volumineus";
+            die;
+        }
 
-    if(!in_array($fileType, $valideType)){
-        echo "le fichier sélectionné n'est pas une image";
-        die;
-    }
-    $tmpName = $_FILES['afficheUplode']['tmp_name'];
-    $Name = $_FILES['afficheUplode']['name'];
-    $fileName = "film/" . $Name;
-    $résultUplod = move_uploaded_file($tmpName, $fileName);
-if($résultUplod){
-    echo "transfere terminer";
-}
+        $fileType = "." . strtolower(substr(strrchr($_FILES['afficheUplode']['name'], '.'), 1));
+
+        if (!in_array($fileType, $valideType)) {
+            echo "le fichier sélectionné n'est pas une image";
+            die;
+        }
+        $tmpName = $_FILES['afficheUplode']['tmp_name'];
+        $Name = $_FILES['afficheUplode']['name'];
+        $fileName = "film/" . $Name;
+        $résultUplod = move_uploaded_file($tmpName, $fileName);
+        if ($résultUplod) {
+            echo "transfere terminer";
+        }
         $nomUplod = $_POST['nomUplod'];
         $auteurUplod = $_POST['auteurUplod'];
         $BDD->query("INSERT INTO `film`(`nom`, `imgSource`, `auteur`, `nb_vote`) VALUES ('$nomUplod','$fileName','$auteurUplod','0')");
         echo '<meta http-equiv="refresh" content="0">';
+    } ?>
 
-    }?>
+
+    <form action="" method="post">
+        <h4> réinitialiser tout les vote c'est ici !!!</h4>
+        <input type="submit" name="réinitialiser" value="réinitialiser" />
+    </form>
+
+    <?php if (isset($_POST['réinitialiser'])) {
+
+        $BDD->query("UPDATE `user` SET `vote`='non'");
+        $BDD->query("UPDATE `film` SET `nb_vote`='0'");
+        echo '<meta http-equiv="refresh" content="0">';
+    } ?>
 </body>
 
 </html>
