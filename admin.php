@@ -37,7 +37,6 @@ connectionbdd(); ?>
                     <td> <?php echo $tab['ADMIN'] ?> </td>
                     <td> <?php echo $tab['vote'] ?> </td>
                     <td><input type="checkbox" id="<?php echo $tab["id_user"] ?>" name="id_user[]" value="<?php echo $tab["id_user"] ?>"></td>
-                    <td><input type="submit" name="<?php echo $tab['id_user'] ?>" value="mofifier" /></td>
                 </tr>
             <?php
             } ?>
@@ -55,6 +54,7 @@ connectionbdd(); ?>
         <input type="submit" name="op" value="admin" />
         <input type="submit" name="deop" value="retirer les droit" />
         <input type="submit" name="suppuser" value="suppre ca" />
+        <input type="submit" name="modif_user" value="modifier" />
 
     </form>
     <?php
@@ -77,7 +77,6 @@ connectionbdd(); ?>
                     <td> <?php echo $tab['auteur'] ?> </td>
                     <td> <?php echo $tab['nb_vote'] ?> </td>
                     <td><input type="checkbox" id="<?php echo $tab["id_user"] ?>" name="id_film[]" value="<?php echo $tab["id_film"] ?>"></td>
-                    <td><input type="submit" name="<?php echo $tab['id_user'] ?>" value="mofifier" /></td>
                 </tr>
             <?php
             } ?>
@@ -229,6 +228,51 @@ connectionbdd(); ?>
         $BDD->query("UPDATE `film` SET `nb_vote`='0'");
         echo '<meta http-equiv="refresh" content="0">';
     } ?>
+
+
+    <?php if (isset($_POST['modif_user'])) {
+
+        $request = $BDD->query("SELECT `id_user`,`identifiant` FROM `user`"); ?>
+        <form action="" method="post">
+            <select name="iduser" id="SelectMedecin">
+                <?php
+                while ($data = $request->fetch()) {
+                    echo '<option value="' . $data["id_user"] . '">' . $data['identifiant'] . '</option>';
+                } ?>
+            </select>
+            <p><input type="submit" name="updateUser" value="modifier" /></p>
+
+        </form>
+    <?php } ?>
+    <?php if (isset($_POST['updateUser'])) {
+        $iduser = $_POST['iduser'];
+
+        $request = $BDD->query("SELECT * FROM `user` where `id_user` =  $iduser "); ?>
+        <form action="" method="post">
+            <?php while ($tab = $request->fetch()) { ?>
+                <input type="text" name="mofifiduser" readonly value="<?php echo $tab['id_user'] ?>">
+                <span>login:</span> <input type="text" name="modiflogin" value='<?php echo $tab['identifiant'] ?> '>
+                <span>mots de passe</span><input type="text" name="modifmdp" value='<?php echo $tab['password'] ?> '>
+                <span>si il y a deja voté</span><input type="text" name="modifvote" value='<?php echo $tab['vote'] ?> '>
+
+            <?php } ?>
+            <input type="submit" name="finalmodifuser" value="modifier" />
+        </form>
+        
+    <?php } ?>
+    <?php 
+    if (isset($_POST['finalmodifuser'])) {
+
+
+$modiflogin = $_POST['modiflogin'];
+$modifmdp = $_POST['modifmdp'];
+$modifvote = $_POST['modifvote'];
+$mofifiduser = $_POST['mofifiduser'];
+$BDD->query("UPDATE `user` SET `identifiant`= '$modiflogin' ,  `password` = '$modifmdp' , `vote`= '$modifvote' WHERE `id_user` =  $mofifiduser ");
+echo '<meta http-equiv="refresh" content="0">';
+} ?>
+
+
 </body>
 
 </html>
