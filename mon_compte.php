@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css.css">
     <title>mon espace</title>
-    <?php include 'fonction.php'; connectionbdd(); ?>
+    <?php include 'fonction.php';
+    connectionbdd(); ?>
 </head>
 
 <body>
-    <?php menuco($BDD); ?>
+<?php if (isset($_SESSION['login'])) {
+    menuco($BDD); ?>
     <form action="" method="POST">
         <?php
 
@@ -32,24 +34,26 @@
         <p><input type="password" name="ConfiMdp" placeholder="confirme mots_de_passe"> </p>
 
         <?php
-            if(isset($_POST['MifMdp'])){
-                if($_POST['ConfiMdp'] == $_POST['Mdp']){
+        if (isset($_POST['MifMdp'])) {
+            if ($_POST['ConfiMdp'] == $_POST['Mdp']) {
                 $id_user = $_SESSION['id_user'];
                 $MDP = $_POST['ConfiMdp'];
                 $BDD->query("UPDATE `user` SET `password`= '$MDP' WHERE  id_user = '$id_user' ");
-
-                }else{
-                    echo 'les 2 mots de passe ne son pas itentique';
-                }
-
-                
-
+            } else {
+                echo 'les 2 mots de passe ne son pas itentique';
             }
+        }
 
 
         ?>
         <input type="submit" name="MifMdp" value="modifier" />
     </form>
+
+    <?php } else {
+        menuco($BDD);
+        echo 'connecter vous pour avoir accès au contenue de la page ';
+    } ?>
+
 </body>
 
 </html>
