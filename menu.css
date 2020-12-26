@@ -6,6 +6,8 @@
     text-align: center;
     position: relative;
     background: #060f18;
+    width:110%;
+    height:20%;
   }
   nav ul {
     list-style-type: none;
@@ -18,7 +20,6 @@
     /*100% divisé par le nombre d'éléments de menu*/
     text-align: center;
     /*Centre le texte dans les éléments de menu*/
-    padding-left: 10%;
   }
   nav a:hover {
     color: rgb(0, 225, 255);

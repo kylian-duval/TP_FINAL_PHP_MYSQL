@@ -13,17 +13,20 @@ function menuco($BDD)
                     <li><a href="index.php">Acceuil</a></li>
                     <li><a href="contact.php">Contact</a></li>
                     <li><a href="#">FILM</a></li>
-                    <li><a href="mon_compte.php">mon compte</a></li>
+                    <li><a href="mon_compte.php">Compte</a></li>
+                </ul>
                     <?php if ($_SESSION['ADMIN'] == 'true') { ?>
-                    <li><a href="message.php">BOÎDE DE RECEPTION</a></li>
-                    <li><a href="admin.php">ADMIN</a></li>
+                <ul id="menu">
+
+                    <li><a href="message.php">Boîte de reception</a></li>
+                    <li><a href="admin.php">Admin</a></li>
                 </ul>
             </nav>
-                    <?php } ?>
+                    <?php } ?><div class="login">
                     <form action="" method="post">
                         <!--<li><input type="submit" name="deco" value="Déconection" /></li>-->
-                        <input class="button" type="submit" name="deco" value="Déconection" />
-                    </form>
+                        <input class="button" type="submit" name="deco" value="Déconection">
+                    </form></div>
         </div>
     <?php } else { ?>
         
