@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="css.css">
+<!--<link rel="stylesheet" href="css.css">-->
 <link rel="stylesheet" href="menu.css">
 <?php session_start();
 $BDD = new PDO('mysql:host=localhost; dbname=film; charset=utf8', 'root', '');
