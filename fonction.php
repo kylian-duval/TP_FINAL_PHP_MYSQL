@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="css.css">
+<link rel="stylesheet" href="menu.css">
 <?php session_start();
 $BDD = new PDO('mysql:host=localhost; dbname=film; charset=utf8', 'root', '');
 function menuco($BDD)
@@ -6,43 +7,42 @@ function menuco($BDD)
     if (isset($_SESSION['login'])) {
 
 ?>
-        <nav>
-            <div class='test'>
-                <ul>
+        <div class='header'>
+            <nav>
+                <ul id="menu">
                     <li><a href="index.php">Acceuil</a></li>
                     <li><a href="contact.php">Contact</a></li>
                     <li><a href="#">FILM</a></li>
                     <li><a href="mon_compte.php">mon compte</a></li>
                     <?php if ($_SESSION['ADMIN'] == 'true') { ?>
-                        <li><a href="message.php">BOÎDE DE RECEPTION</a></li>
-                        <li><a href="admin.php">ADMIN</a></li>
+                    <li><a href="message.php">BOÎDE DE RECEPTION</a></li>
+                    <li><a href="admin.php">ADMIN</a></li>
+                </ul>
+            </nav>
                     <?php } ?>
                     <form action="" method="post">
                         <!--<li><input type="submit" name="deco" value="Déconection" /></li>-->
-                        <div class=""><input type="submit" name="deco" value="Déconection" /></div>
+                        <input class="button" type="submit" name="deco" value="Déconection" />
                     </form>
-                </ul>
-            </div>
-        </nav>
+        </div>
     <?php } else { ?>
-        <nav>
-            <div class='test'>
-                <ul>
+        
+        <div class='header'>
+            <nav>
+                <ul id="menu">
                     <li><a href="index.php">Acceuil</a></li>
                     <li><a href="film.php">FILM</a></li>
-                    <form action="" method="post">
-                        <li>
-                            <p><input type="text" name="login" placeholder="entrée le login" required> </p>
-                            <p><input type="password" name="mdp" placeholder="votre mots de passe" required> </p>
-                        </li>
-                        <li>
-                            <div class="pading"><input type="submit" name="valide" value="Connection" /></div>
-                        </li>
-                    </form>
-                    <div class='inscrire'><button onclick="window.location.href = 'inscrire.php';"> S'inscrire</button></div>
-                </ul>
-            </div>
-        </nav>
+                </ul>                
+            </nav>
+                <form action="" method="post">
+                    <div class="login"><input class="enter" type="text" name="login" placeholder="entrée le login" required></div>
+                    <div class="login"><input class="enter" type="password" name="mdp" placeholder="votre mot de passe" required></div>
+                    <input class="button" type="submit" name="valide" value="Connection">
+                    <button class="button" onclick="window.location.href = 'inscrire.php';"> S'inscrire</button>
+                </form>
+
+        </div>
+        
     <?php }
     /*$nom = 'admin';
     $password = 'admin';
