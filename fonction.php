@@ -15,37 +15,40 @@ function menuco($BDD)
                     <li><a href="#">FILM</a></li>
                     <li><a href="mon_compte.php">Compte</a></li>
                 </ul>
-                    <?php if ($_SESSION['ADMIN'] == 'true') { ?>
-                <ul id="menu">
+                <?php if ($_SESSION['ADMIN'] == 'true') { ?>
+                    <ul id="menu">
 
-                    <li><a href="message.php">Boîte de reception</a></li>
-                    <li><a href="admin.php">Admin</a></li>
-                </ul>
+                        <li><a href="message.php">Boîte de reception</a></li>
+                        <li><a href="admin.php">Admin</a></li>
+                    </ul>
             </nav>
-                    <?php } ?><div class="login">
-                    <form action="" method="post">
-                        <!--<li><input type="submit" name="deco" value="Déconection" /></li>-->
-                        <input class="button" type="submit" name="deco" value="Déconection">
-                    </form></div>
+        <?php } ?>
+        <div class="login">
+            <form action="" method="post">
+                <!--<li><input type="submit" name="deco" value="Déconection" /></li>-->
+                <input class="button" type="submit" name="deco" value="Déconection">
+            </form>
+        </div>
         </div>
     <?php } else { ?>
-        
+
         <div class='header'>
             <nav>
                 <ul id="menu">
                     <li><a href="index.php">Acceuil</a></li>
-                    <li><a href="film.php">FILM</a></li>
-                </ul>                
+                    <li><a href="vote.php">VOTE</a></li>
+                    <li><a href="contact.php">Contact</a></li>
+                </ul>
             </nav>
-                <form action="" method="post">
-                    <div class="login"><input class="enter" type="text" name="login" placeholder="entrée le login" required></div>
-                    <div class="login"><input class="enter" type="password" name="mdp" placeholder="votre mot de passe" required></div>
-                    <input class="button" type="submit" name="valide" value="Connection">
-                    <button class="button" onclick="window.location.href = 'inscrire.php';"> S'inscrire</button>
-                </form>
+            <form action="" method="post">
+                <div class="login"><input class="enter" type="text" name="login" placeholder="entrée le login" required></div>
+                <div class="login"><input class="enter" type="password" name="mdp" placeholder="votre mot de passe" required></div>
+                <input class="button" type="submit" name="valide" value="Connection">
+                <input type=button onclick=window.location.href='inscrire.php'; value="S'inscrire" class="button"/>
+            </form>
 
         </div>
-        
+
     <?php }
     /*$nom = 'admin';
     $password = 'admin';
@@ -195,7 +198,7 @@ function AfficheFilm($BDD)
     while ($data = $request->fetch()) { ?>
         <table border="2">
             <tr>
-                <td align= center> <?php echo $data['nom'] ?> </td>
+                <td align=center> <?php echo $data['nom'] ?> </td>
             </tr>
             <tr>
                 <td>

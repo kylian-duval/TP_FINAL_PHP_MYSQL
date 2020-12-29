@@ -10,43 +10,63 @@
 </head>
 
 <body>
+<?php menuco($BDD); ?>
     <?php
-    
-    if ($_SESSION['vote'] == 'non') {
-        //$BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
-        $request = $BDD->query("SELECT `id_film`, `nom`, `imgSource` FROM `film`"); ?>
-        <form action="" method="post">
-            <select name="idfilme" id="SelectMedecin">
-                <?php
-                while ($data = $request->fetch()) {
-                    echo '<option value="' . $data["id_film"] . '">' . $data['nom'] . '</option>';
-                } ?>
-            </select>
-            <p><input type="submit" name="vote" value="voté" /></p>
+    if (isset($_SESSION['login'])) {
 
-            <?php $request = $BDD->query("SELECT `id_film`, `nom`, `imgSource` FROM `film`"); ?>
-            <?php
-            while ($data = $request->fetch()) { ?>
-                <table border="2">
-                    <tr>
-                        <td align=center> <?php echo $data['nom'] ?> </td>
-                    </tr>
+        if ($_SESSION['vote'] == 'non') {
+            //$BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+            $request = $BDD->query("SELECT `id_film`, `nom`, `imgSource` FROM `film`"); ?>
+            <form action="" method="post">
+                <select name="idfilme" id="SelectMedecin">
+                    <?php
+                    while ($data = $request->fetch()) {
+                        echo '<option value="' . $data["id_film"] . '">' . $data['nom'] . '</option>';
+                    } ?>
+                </select>
+                <p><input type="submit" name="vote" value="voté" /></p>
+
+                <?php $request = $BDD->query("SELECT `id_film`, `nom`, `imgSource` FROM `film`"); ?>
+                <?php
+                while ($data = $request->fetch()) { ?>
+                    <table border="2">
+                        <tr>
+                            <td align=center> <?php echo $data['nom'] ?> </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div> <img src="<?php echo $data['imgSource']; ?>"> </div>
+                            </td>
+                        </tr>
+                    </table>
+
+
+
+                <?php } ?>
+            </form>
+        <?php } else {
+
+
+        ?>
+            <h1>vous avais voter voici les résulta des vote actuelle</h1>
+            <table border="2">
+                <?php $request = $BDD->query("SELECT `nom`, `nb_vote` FROM `film`");
+                while ($data = $request->fetch()) { ?>
                     <tr>
                         <td>
-                            <div> <img src="<?php echo $data['imgSource']; ?>"> </div>
+                            <?php echo $data['nom']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['nb_vote']; ?>
                         </td>
                     </tr>
-                </table>
+                <?php } ?>
+            </table>
+        <?php }
+    } else { ?>
 
-
-
-            <?php } ?>
-        </form>
-    <?php } else {
-
-        
-    ?>
-        <h1>vous avais voter voici les résulta des vote actuelle</h1>
+        <h1>il faut que vous soyer connecter pour avoir la possibilite de voté</h1>
+        <h3>voici les résulta des vote actuelle</h3>
         <table border="2">
             <?php $request = $BDD->query("SELECT `nom`, `nb_vote` FROM `film`");
             while ($data = $request->fetch()) { ?>
@@ -60,8 +80,10 @@
                 </tr>
             <?php } ?>
         </table>
-    <?php } ?>
 
+
+
+    <?php } ?>
 
     <?php
 
@@ -80,17 +102,9 @@
         $_SESSION['vote'] = 'oui';
         echo '<meta http-equiv="refresh" content="0">';
     } ?>
-    
 
-<?php
-    if (isset($_SESSION['login'])) {
 
-        echo 'vous etre conecter';
-    }else{
 
-        echo 'vous etre deconecter';
-    }
-        ?>
 </body>
 
 </html>
