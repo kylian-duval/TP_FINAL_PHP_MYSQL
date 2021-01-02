@@ -1,4 +1,4 @@
-<!--<link rel="stylesheet" href="css.css">-->
+
 <link rel="stylesheet" href="menu.css">
 <?php session_start();
 $BDD = new PDO('mysql:host=localhost; dbname=film; charset=utf8', 'root', '');
@@ -10,32 +10,30 @@ function menuco($BDD)
         <div class='header'>
             <nav>
                 <ul id="menu">
-                    <li><a href="index.php">Acceuil</a></li>
+                    <li><a href="index.php">Accueil</a></li>
                     <li><a href="contact.php">Contact</a></li>
-                    <li><a href="#">Film</a></li>
+                    <li><a href="film.php">Film</a></li>
                     <li><a href="mon_compte.php">Compte</a></li>
-                </ul>
+                
                 <?php if ($_SESSION['ADMIN'] == 'true') { ?>
-                    <ul id="menu">
-
-                        <li><a href="message.php">Boîte de reception</a></li>
+                    
+                        <li><a href="message.php">Boite Reception</a></li>
                         <li><a href="admin.php">Admin</a></li>
                     </ul>
             </nav>
         <?php } ?>
-        <div class="login">
+        <div class="deconnection">
             <form action="" method="post">
-                <!--<li><input type="submit" name="deco" value="Déconection" /></li>-->
-                <input class="button" type="submit" name="deco" value="Déconection">
+                <input class="button" type="submit" name="deco" value="Déconnection">
             </form>
-        </div>
+            </div>
         </div>
     <?php } else { ?>
 
         <div class='header'>
             <nav>
                 <ul id="menu">
-                    <li><a href="index.php">Acceuil</a></li>
+                    <li><a href="index.php">Accueil</a></li>
                     <li><a href="vote.php">Vote</a></li>
                     <li><a href="contact.php">Contact</a></li>
                 </ul>
@@ -43,8 +41,8 @@ function menuco($BDD)
             <form action="" method="post">
                 <div class="login"><input class="enter" type="text" name="login" placeholder="entrée le login" required></div>
                 <div class="login"><input class="enter" type="password" name="mdp" placeholder="votre mot de passe" required></div>
-                <input class="button" type="submit" name="valide" value="Connection">
-                <input type=button onclick=window.location.href='inscrire.php'; value="S'inscrire" class="button"/>
+                <div class="login"><input class="button" type="submit" name="valide" value="Connection">
+                <input type=button onclick=window.location.href='inscrire.php'; value="S'inscrire" class="button"></div>
             </form>
 
         </div>
@@ -109,7 +107,7 @@ function verifUser($BDD)
     $requeteMail->execute(array($_POST['LOGIN']));
     $userExist = $requeteMail->rowCount();
     if ($userExist != 1) {
-        echo "bien connecte";
+        echo "bien connecter";
         inscription($_POST['LOGIN'], $_POST['CONFMDP'], $BDD);
     } else {
         echo "il y a deja un user";

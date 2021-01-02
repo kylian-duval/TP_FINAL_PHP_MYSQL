@@ -26,7 +26,7 @@ connectionbdd(); ?>
                         <td>login</td>
                         <td>password</td>
                         <td>ADMIN</td>
-                        <td>voté</td>
+                        <td>voter</td>
                     </tr>
                     <?php
                     while ($tab = $request->fetch()) { ?>
@@ -52,8 +52,8 @@ connectionbdd(); ?>
                                                                         ?>"> -->
 
                 <input type="submit" name="op" value="admin" />
-                <input type="submit" name="deop" value="retirer les droit" />
-                <input type="submit" name="suppuser" value="suppre ca" />
+                <input type="submit" name="deop" value="retirer les droits" />
+                <input type="submit" name="suppuser" value="supprimer" />
                 <input type="submit" name="modif_user" value="modifier" />
 
             </form>
@@ -82,7 +82,7 @@ connectionbdd(); ?>
                     } ?>
                 </table>
 
-                <input type="submit" name="suppfilm" value="suppre ca" />
+                <input type="submit" name="suppfilm" value="supprimer" />
 
             </form>
             <?php
@@ -150,9 +150,9 @@ connectionbdd(); ?>
                 echo '<meta http-equiv="refresh" content="0">';
             }
             ?>
-            <h1>par quelle metode vous aller vous ajouter un film ?</h1>
+            <h1>Par quelle methode vous aller vous ajouter un film ?</h1>
             <form action="" method="POST">
-                <p><span> via lieu internet:</span> <input type="submit" name="lien" value="lien" /> <span>ou </span><span>vien uplode de fichier: </span><input type="submit" name="uplode" value="uplode" /></p>
+                <p><span> via lien internet:</span> <input type="submit" name="lien" value="lien" /> <span>ou </span><span>via uploade de fichier: </span><input type="submit" name="uplode" value="uplode" /></p>
             </form>
             <form action="" method="POST">
                 <?php if (isset($_POST['lien'])) { ?>
@@ -218,7 +218,7 @@ connectionbdd(); ?>
 
 
             <form action="" method="post">
-                <h4> réinitialiser tout les vote c'est ici !!!</h4>
+                <h4> réinitialiser tout les votes c'est ici !!!</h4>
                 <input type="submit" name="réinitialiser" value="réinitialiser" />
             </form>
 
@@ -275,7 +275,7 @@ connectionbdd(); ?>
 
     <?php } else {
             menuco($BDD);
-            echo 'vous etre pas administrateur de cette apllication web vous avais pas accès au contenu  de la page';
+            echo 'vous etes pas administrateur de cette apllication web vous avais pas accès au contenu de la page';
         }
     } else {
         menuco($BDD);

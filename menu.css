@@ -1,17 +1,18 @@
 .header{
     padding: 15px 15px 3px;
-    box-shadow: 0 10px 10px rgba(19, 221, 221, 0.418);
+    box-shadow: 5px 10px 10px rgba(19, 221, 221, 0.418),inset 0 0 2em rgba(3, 119, 119, 0.418),5px 10px 10px rgba(19, 221, 221, 0.418);
     border-radius: 10px;
     color:white;
     text-align: center;
-    position: relative;
     background: #060f18;
     height:auto;
+    display:block;
+    margin: 10px 10px 10px 450px;
+    width:55%;
   }
   nav ul {
     list-style-type: none;
     margin: auto;
-    width: 600px;
   }
   nav li {
     float: left;
@@ -103,4 +104,8 @@
   .button:hover,
   .button:focus {
       filter: hue-rotate(10deg) saturate(1.2);
+  }
+  .deconnection{
+    float:right;
+    margin:5.5% 0% 0% 0%;
   }
