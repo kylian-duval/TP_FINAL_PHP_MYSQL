@@ -12,7 +12,7 @@ function menuco($BDD)
                 <ul id="menu">
                     <li><a href="index.php">Acceuil</a></li>
                     <li><a href="contact.php">Contact</a></li>
-                    <li><a href="#">FILM</a></li>
+                    <li><a href="#">Film</a></li>
                     <li><a href="mon_compte.php">Compte</a></li>
                 </ul>
                 <?php if ($_SESSION['ADMIN'] == 'true') { ?>
@@ -36,7 +36,7 @@ function menuco($BDD)
             <nav>
                 <ul id="menu">
                     <li><a href="index.php">Acceuil</a></li>
-                    <li><a href="vote.php">VOTE</a></li>
+                    <li><a href="vote.php">Vote</a></li>
                     <li><a href="contact.php">Contact</a></li>
                 </ul>
             </nav>

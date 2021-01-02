@@ -6,8 +6,7 @@
     text-align: center;
     position: relative;
     background: #060f18;
-    width:110%;
-    height:20%;
+    height:auto;
   }
   nav ul {
     list-style-type: none;

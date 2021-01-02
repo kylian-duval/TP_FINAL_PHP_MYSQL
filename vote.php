@@ -48,7 +48,7 @@
 
 
         ?>
-            <h1>vous avais voter voici les résulta des vote actuelle</h1>
+            <h1>vous avez voter voici les résultats des votes actuelles</h1>
             <table border="2">
                 <?php $request = $BDD->query("SELECT `nom`, `nb_vote` FROM `film`");
                 while ($data = $request->fetch()) { ?>
@@ -65,8 +65,8 @@
         <?php }
     } else { ?>
 
-        <h1>il faut que vous soyer connecter pour avoir la possibilite de voté</h1>
-        <h3>voici les résulta des vote actuelle</h3>
+        <h1>il faut que vous soyer connecter pour avoir la possibilité de voter</h1>
+        <h3>voici les résultats des votes actuelles</h3>
         <table border="2">
             <?php $request = $BDD->query("SELECT `nom`, `nb_vote` FROM `film`");
             while ($data = $request->fetch()) { ?>

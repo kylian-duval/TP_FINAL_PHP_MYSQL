@@ -13,7 +13,7 @@
 
     <body>
         <?php menuco($BDD); ?>
-        <h4>vous etre deja iscrit vous pouvais pas vous ré instrire</h4>
+        <h4>vous etes déja inscrit</h4>
     </body>
 <?php } else { ?>
 
