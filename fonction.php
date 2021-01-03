@@ -34,15 +34,17 @@ function menuco($BDD)
             <nav>
                 <ul id="menu">
                     <li><a href="index.php">Accueil</a></li>
-                    <li><a href="vote.php">Vote</a></li>
+                    <li><a href="vote.php">Film</a></li>
                     <li><a href="contact.php">Contact</a></li>
                 </ul>
             </nav>
             <form action="" method="post">
+            <div class="section">
                 <div class="login"><input class="enter" type="text" name="login" placeholder="entrée le login" required></div>
                 <div class="login"><input class="enter" type="password" name="mdp" placeholder="votre mot de passe" required></div>
                 <div class="login"><input class="button" type="submit" name="valide" value="Connection">
                 <input type=button onclick=window.location.href='inscrire.php'; value="S'inscrire" class="button"></div>
+            </div>
             </form>
 
         </div>

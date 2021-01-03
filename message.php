@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Message</title>
     <?php include 'fonction.php';
     $BDD = connectionbdd(); ?>
 </head>
@@ -62,14 +62,14 @@
                     }
 
                     ?>
-                    <input type="submit" name="SuppMes" value="suppre ca" />
+                    <input type="submit" name="SuppMes" value="supprimer" />
                 </form>
 
             </div>
 
     <?php } else {
             menuco($BDD);
-            echo "seul les administrateur de l'aplication web on accèce au message";
+            echo "seul les administrateur de l'aplication web on accès au message";
         }
     } else {
         menuco($BDD);

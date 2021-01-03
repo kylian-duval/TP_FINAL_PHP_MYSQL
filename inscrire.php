@@ -4,18 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inscription</title>
     <link rel="stylesheet" href="inscrire.css">
     <?php include "fonction.php";
     connectionbdd(); ?>
 </head>
 <?php if (isset($_SESSION['login'])) { ?>
 <body>
+        <?php menuco($BDD); ?>
         <h4>vous êtes déja inscrit</h4>
 
 <?php } else { ?>
         <div class="login-box">
-            <h2>Formulaire</h2>
+            <h2>Inscription</h2>
                 <form action="" method="POST">
                 <div class="user-box">
                         <input type="text" name="LOGIN" required>
@@ -23,14 +24,20 @@
                 </div>
                 <div class="user-box">
                         <input type="password" name="MDP" required>
-                        <label>Mot de passe</label>*
+                        <label>Mot de passe</label>
                 </div>
                 <div class="user-box">
                         <input type="password" name="CONFMDP" required>
                         <label>Confirmer mot de passe</label>
                 </div>
-                <form action="" method="post">
                 <input class="button" type="submit" name="deco" value="S'inscrire">
+                <a href="index.php">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Accueil
+                </a>
                 </form>
         </div>
     </body>
