@@ -193,7 +193,7 @@ connectionbdd(); ?>
                 $fileSize = $_FILES['afficheUplode']['size'];
 
                 if ($fileSize > $maxSize) {
-                    echo "les fichier est trop volumineus";
+                    echo "les fichier est trop volumineux";
                     die;
                 }
 

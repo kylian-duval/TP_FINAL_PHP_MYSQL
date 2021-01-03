@@ -40,7 +40,7 @@
                 $MDP = $_POST['ConfiMdp'];
                 $BDD->query("UPDATE `user` SET `password`= '$MDP' WHERE  id_user = '$id_user' ");
             } else {
-                echo 'les 2 mots de passe ne son pas itentique';
+                echo 'les 2 mots de passe ne sont pas identique';
             }
         }
 

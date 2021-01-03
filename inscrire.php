@@ -5,37 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="inscrire.css">
     <?php include "fonction.php";
     connectionbdd(); ?>
 </head>
 <?php if (isset($_SESSION['login'])) { ?>
+<body>
+        <h4>vous êtes déja inscrit</h4>
 
-    <body>
-        <?php menuco($BDD); ?>
-        <h4>vous etes déja inscrit</h4>
-    </body>
 <?php } else { ?>
-
-    <body class="fun-color">
-        <div class="bienvenu">
-            <div class="centrer" id='myDIV'>
+        <div class="login-box">
+            <h2>Formulaire</h2>
                 <form action="" method="POST">
-                    <p>
-                        <span>Nom d'utilisateur :</span>
-                        <input type="text" name="LOGIN" placeholder="Nom d'utilisateur" required>
-                    </p>
-                    <p>
-                        <span>Crée votre mot de passe:</span>
-                        <input type="password" name="MDP" placeholder="Crée mots de passe" required>
-                    </p>
-                    <p>
-                        <span>Confirmer votre mot de passe :</span>
-                        <input type="password" name="CONFMDP" placeholder="confirmer votre mots de passe" required>
-                    </p>
-                    <p><input type="submit" value="S'inscrire" /> <INPUT TYPE="BUTTON" VALUE="Retour" onclick="window.location.href = 'index.php';"></p>
+                <div class="user-box">
+                        <input type="text" name="LOGIN" required>
+                        <label>Nom</label>
+                </div>
+                <div class="user-box">
+                        <input type="password" name="MDP" required>
+                        <label>Mot de passe</label>*
+                </div>
+                <div class="user-box">
+                        <input type="password" name="CONFMDP" required>
+                        <label>Confirmer mot de passe</label>
+                </div>
+                <form action="" method="post">
+                <input class="button" type="submit" name="deco" value="S'inscrire">
                 </form>
-            </div>
         </div>
     </body>
 <?php

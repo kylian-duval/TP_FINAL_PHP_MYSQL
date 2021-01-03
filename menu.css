@@ -54,8 +54,8 @@
     text-align: center;
   }
   body{
-    height:100vh;
-    /*background-image:url(https://wallpapercave.com/wp/wp2757890.gif);*/
+    /*height:100vh;
+    background-image:url(https://wallpapercave.com/wp/wp2757890.gif);*/
     font-family: arial;
     margin-top:0;
     /*background-image: linear-gradient(to left bottom, #060f18, #101e28, #142c38, #163b49, #174b58, #185b68, #1a6d76, #1f7e84, #279496, #33aba6, #42c2b5, #55dac3);*/
@@ -89,15 +89,12 @@
   .button {
       padding: 5px 10px;
       border-radius: 10px;
-      /* les dégradés en question */
-      /*border-image: linear-gradient(to right, #1db0dc, #23d0d3);*/
       background: linear-gradient(to right, #1db0dc, #23d0d3);
       color: #fff;
       cursor: pointer;
       text-decoration: none;
       font-size: 1em;
       font-weight: bold;
-      /* On prévoit une transition pour l'effet au survol */
       transition: all 0.3s ease 0s;
       filter: hue-rotate(0deg) saturate(1);
   }
@@ -108,4 +105,7 @@
   .deconnection{
     float:right;
     margin:5.5% 0% 0% 0%;
+  }
+  img{
+    width:500px;
   }
