@@ -7,30 +7,31 @@
     <title>Inscription</title>
     <link rel="stylesheet" href="inscrire.css">
     <?php include "fonction.php";
-    connectionbdd(); ?>
+    $BDD = connectionbdd(); ?>
 </head>
 <?php if (isset($_SESSION['login'])) { ?>
-<body>
+
+    <body>
         <?php menuco($BDD); ?>
         <h4>vous êtes déja inscrit</h4>
 
-<?php } else { ?>
+    <?php } else { echo '$BDD';?>
         <div class="login-box">
             <h2>Inscription</h2>
-                <form action="" method="POST">
+            <form action="" method="POST">
                 <div class="user-box">
-                        <input type="text" name="LOGIN" required>
-                        <label>Nom</label>
+                    <input type="text" name="LOGIN" required>
+                    <label>Nom</label>
                 </div>
                 <div class="user-box">
-                        <input type="password" name="MDP" required>
-                        <label>Mot de passe</label>
+                    <input type="password" name="MDP" required>
+                    <label>Mot de passe</label>
                 </div>
                 <div class="user-box">
-                        <input type="password" name="CONFMDP" required>
-                        <label>Confirmer mot de passe</label>
+                    <input type="password" name="CONFMDP" required>
+                    <label>Confirmer mot de passe</label>
                 </div>
-                <input class="button" type="submit" name="deco" value="S'inscrire">
+                <input class="button" type="submit" name="inscrir" value="S'inscrire">
                 <a href="index.php">
                     <span></span>
                     <span></span>
@@ -38,18 +39,22 @@
                     <span></span>
                     Accueil
                 </a>
-                </form>
+            </form>
         </div>
     </body>
 <?php
 
-    if (isset($_POST['MDP']) && isset($_POST['CONFMDP'])) {
-        if ($_POST['MDP'] != $_POST['CONFMDP']) {
-            echo "les deux mots de passe ne correspondent pas";
-        } else {
-            verifUser($BDD);
+    if (isset($_POST['inscrir'])) {
+        if (isset($_POST['MDP']) && isset($_POST['CONFMDP'])) {
+
+            if ($_POST['MDP'] != $_POST['CONFMDP']) {
+                echo "les deux mots de passe ne correspondent pas";
+            } else {
+                verifUser($BDD);
+            }
         }
     }
-} ?>
+}
+?>
 
 </html>

@@ -97,14 +97,14 @@ function inscription($identifiant, $password, $BDD)
 {
 
     //$BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
-    $roquette = ("INSERT INTO `user`(`identifiant`, `password`, `ADMIN`) VALUES ('$identifiant','$password','false') ");
-
+    $roquette = ("INSERT INTO `user`(`identifiant`, `password`, `ADMIN` ,`vote`) VALUES ('$identifiant','$password','false', 'non') ");
+    echo $roquette;
     $BDD->query("$roquette");
 }
 
 function verifUser($BDD)
 {
-    $BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+    //$BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
     $requeteMail = $BDD->prepare("SELECT * FROM user WHERE identifiant = ?");
     $requeteMail->execute(array($_POST['LOGIN']));
     $userExist = $requeteMail->rowCount();
