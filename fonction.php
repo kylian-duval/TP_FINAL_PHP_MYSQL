@@ -1,5 +1,6 @@
 
 <link rel="stylesheet" href="menu.css">
+<link rel="stylesheet" href="index.css">
 <?php session_start();
 $BDD = new PDO('mysql:host=localhost; dbname=film; charset=utf8', 'root', '');
 function menuco($BDD)
@@ -196,15 +197,19 @@ function AfficheFilm($BDD)
     $request = $BDD->query("SELECT nom, imgSource FROM film");
 
     while ($data = $request->fetch()) { ?>
-        <table border="2">
+        <table class="blueTable" border="2">
+        <thead>
             <tr>
-                <td align=center> <?php echo $data['nom'] ?> </td>
+                <th align=center> <?php echo $data['nom'] ?> </th>
             </tr>
+        </thead>
+        <tbody>
             <tr>
                 <td>
                     <div> <img src="<?php echo $data['imgSource']; ?>"> </div>
                 </td>
             </tr>
+        </tbody>
         </table>
 
 <?php }

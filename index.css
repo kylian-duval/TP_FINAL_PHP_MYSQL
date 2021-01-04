@@ -1,0 +1,37 @@
+body{
+    background-position: cover;
+    background: linear-gradient(#141e30, #244f55);
+    background-repeat: no-repeat;
+}
+table.blueTable {
+    border: 1px solid #00352c;
+    background-color: #EEEEEE;
+    text-align: center;
+    border-collapse: collapse;
+  }
+  table.blueTable td, table.blueTable th {
+    border: 2px solid #060A1B;
+  }
+  table.blueTable tbody td {
+    font-size: 14px;
+    color: #FFFFFF;
+  }
+  table.blueTable tr:nth-child(even) {
+    background: #D0E4F5;
+  }
+  table.blueTable thead {
+    background: #5CD1CB;
+    border-bottom: 5px solid #000000;
+  }
+  table.blueTable thead th {
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+  }
+  table.blueTable tfoot td {
+    font-size: 14px;
+  }
+  table{
+      margin-left: 35%;
+  }

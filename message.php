@@ -22,7 +22,8 @@
                 <form action="" method="post">
                     <?php
                     while ($tab = $request->fetch()) { ?>
-                        <table border="2">
+                        <table class="styled-table" border="2">
+                        <thead>
                             <tr>
                                 <td><span> <?php echo $tab['nom'] ?> </span> </td>
                                 <td> <?php echo $tab['prénom'] ?> </td>
@@ -34,9 +35,12 @@
                                 </td>
                                 <td><input type="checkbox" id="<?php echo $tab["id_Contact"] ?>" name="id_Contact[]" value="<?php echo $tab["id_Contact"] ?>"></td>
                             </tr>
+                        </thead>
+                        <tbody>
                             <tr>
                                 <td> <?php echo $tab['message'] ?> </td>
                             </tr>
+                        </tbody>
                         </table>
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
