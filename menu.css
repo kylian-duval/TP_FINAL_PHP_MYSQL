@@ -1,4 +1,4 @@
-.header{
+﻿.header{
     padding: 15px 15px 3px;
     box-shadow: 5px 10px 10px rgba(19, 221, 221, 0.418),inset 0 0 2em rgba(3, 119, 119, 0.418),5px 10px 10px rgba(19, 221, 221, 0.418);
     border-radius: 10px;
@@ -54,7 +54,6 @@
     text-align: center;
   }
   body{
-    height:100vh;
     /*background-image:url();*/
     font-family: arial;
     margin-top:0;

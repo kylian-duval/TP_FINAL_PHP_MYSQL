@@ -18,7 +18,7 @@ connectionbdd(); ?>
         if ($_SESSION['ADMIN'] == 'true') {
             menuco($BDD);
 
-            //$BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
+          
             $request = $BDD->query("SELECT * FROM `user` WHERE 1"); ?>
             <div class="login-box">
                 <h2>Interface Admin </h2>
@@ -48,15 +48,7 @@ connectionbdd(); ?>
                     <?php
                     } ?>
                 </table>
-                <!-- echo '<p>id_user mots_de_passe ';
-            while ($tab = $request->fetch()) {
-                echo '<p>' . $tab["id_user"] . ' ' . $tab["identifiant"] .'';
-    
-            ?>
-    
-                <input type="checkbox" id="<?php // echo $tab["id_user"] 
-                                            ?>" name="id_user[]" value="<?php //echo $tab["id_user"] 
-                                                                        ?>"> -->
+
 
                 <input type="submit" name="op" value="admin" />
                 <input type="submit" name="deop" value="retirer les droits" />
@@ -98,8 +90,7 @@ connectionbdd(); ?>
             </form>
             <?php
 
-            //echo "</p>";
-            //} 
+            
 
             //TTRAITEMENT SUPPRESSION
             if (isset($_POST['suppuser'])) {
@@ -119,7 +110,7 @@ connectionbdd(); ?>
 
             if (isset($_POST['op'])) {
 
-                //NE PAS METTRE []
+                
                 foreach ($_POST["id_user"] as $check) {
                     if (!isset($checkoptions)) {
                         $checkoptions = $check;
@@ -133,7 +124,7 @@ connectionbdd(); ?>
             }
             if (isset($_POST['deop'])) {
 
-                //NE PAS METTRE []
+                
                 foreach ($_POST["id_user"] as $check) {
                     if (!isset($checkoptions)) {
                         $checkoptions = $check;
@@ -148,7 +139,7 @@ connectionbdd(); ?>
 
             if (isset($_POST['suppfilm'])) {
 
-                //NE PAS METTRE []
+                
                 foreach ($_POST["id_film"] as $check) {
                     if (!isset($checkoptions)) {
                         $checkoptions = $check;
@@ -286,11 +277,11 @@ connectionbdd(); ?>
 
     <?php } else {
             menuco($BDD);
-            echo 'vous etes pas administrateur de cette apllication web vous avais pas accès au contenu de la page';
+            echo '<div align=center class = error>vous etes pas administrateur de cette apllication web vous avais pas accès au contenu de la page</div>';
         }
     } else {
         menuco($BDD);
-        echo 'connecter vous pour avoir accès au contenue de la page ';
+        echo '<div align=center class = error >connecter vous pour avoir accès au contenue de la page </div>';
     } ?>
 
 

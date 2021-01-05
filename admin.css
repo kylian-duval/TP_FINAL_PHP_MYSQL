@@ -1,3 +1,8 @@
+body{
+	
+    height:100vh;
+}
+
 .styled-table {
     border-collapse: collapse;
     margin: 25px 0;

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Film</title>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="vote.css">
     <?php include 'fonction.php';
     connectionbdd(); ?>
 </head>
@@ -16,7 +16,6 @@
     if (isset($_SESSION['login'])) {
 
         if ($_SESSION['vote'] == 'non') {
-            //$BDD = new PDO('mysql:host=192.168.65.227; dbname=film;charset=utf8', 'kiki', 'kiki');
             $request = $BDD->query("SELECT `id_film`, `nom`, `imgSource` FROM `film`"); ?>
             <form action="" method="post">
                 <select name="idfilme" id="SelectMedecin">
@@ -49,8 +48,9 @@
 
 
         ?>
-            <h1>vous avez voter voici les résultats des votes actuelles</h1>
+            <h1 class="error" align=center>vous avez voter voici les résultats des votes actuelles</h1>
             <table border="2">
+                <tr align=center><td>titre du film</td><td>nombre de vote</td></tr>
                 <?php $request = $BDD->query("SELECT `nom`, `nb_vote` FROM `film`");
                 while ($data = $request->fetch()) { ?>
                     <tr>
@@ -66,9 +66,10 @@
         <?php }
     } else { ?>
 
-        <h1>il faut que vous soyer connecter pour avoir la possibilité de voter</h1>
-        <h3>voici les résultats des votes actuelles</h3>
+        <h1 class='error' align='center'>il faut que vous soyer connecter pour avoir la possibilité de voter</h1>
+        <h3 class='error' align ='center'>voici les résultats des votes actuelles</h3>
         <table border="2">
+        <tr align=center><td>titre du film</td><td>nombre de vote</td></tr>
             <?php $request = $BDD->query("SELECT `nom`, `nb_vote` FROM `film`");
             while ($data = $request->fetch()) { ?>
                 <tr>

@@ -2,4 +2,9 @@ body{
     background: linear-gradient(#141e30, #244f55);
     background-position: cover;
     background-repeat: no-repeat;
+    height: 100Vh;
+}
+table{
+color: white;
+background-color: #5CD1CB;
 }

@@ -13,9 +13,10 @@
 
     <body>
         <?php menuco($BDD); ?>
-        <h4>vous êtes déja inscrit</h4>
+        <h2 class='error' align=center>vous êtes déja inscrit</h2>
 
-    <?php } else { echo '$BDD';?>
+    <?php } else {
+    echo '$BDD'; ?>
         <div class="login-box">
             <h2>Inscription</h2>
             <form action="" method="POST">
@@ -40,21 +41,22 @@
                     Accueil
                 </a>
             </form>
-        </div>
-    </body>
-<?php
+        <?php
 
-    if (isset($_POST['inscrir'])) {
-        if (isset($_POST['MDP']) && isset($_POST['CONFMDP'])) {
+        if (isset($_POST['inscrir'])) {
+            if (isset($_POST['MDP']) && isset($_POST['CONFMDP'])) {
 
-            if ($_POST['MDP'] != $_POST['CONFMDP']) {
-                echo "les deux mots de passe ne correspondent pas";
-            } else {
-                verifUser($BDD);
+                if ($_POST['MDP'] != $_POST['CONFMDP']) {
+                    echo "<div class='error'>les deux mots de passe ne correspondent pas</div>";
+                } else {
+                    verifUser($BDD);
+                }
             }
         }
     }
-}
-?>
+        ?>
+        </div>
+    </body>
+
 
 </html>
