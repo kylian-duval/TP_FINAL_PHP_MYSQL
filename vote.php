@@ -56,6 +56,31 @@
 
             ?>
                 <h1 class="error" align=center>vous avez voter voici les résultats des votes actuelles</h1>
+                <div class='tableau'>
+                    <table border="2">
+                        <tr align=center>
+                            <td>titre du film</td>
+                            <td>nombre de vote</td>
+                        </tr>
+                        <?php $request = $BDD->query("SELECT `nom`, `nb_vote` FROM `film`");
+                        while ($data = $request->fetch()) { ?>
+                            <tr>
+                                <td>
+                                    <?php echo $data['nom']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $data['nb_vote']; ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </table>
+                </div>
+            <?php }
+        } else { ?>
+
+            <h1 class='error' align='center'>il faut que vous soyer connecter pour avoir la possibilité de voter</h1>
+            <h3 class='error' align='center'>voici les résultats des votes actuelles</h3>
+            <div class='tableau'>
                 <table border="2">
                     <tr align=center>
                         <td>titre du film</td>
@@ -73,28 +98,7 @@
                         </tr>
                     <?php } ?>
                 </table>
-            <?php }
-        } else { ?>
-
-            <h1 class='error' align='center'>il faut que vous soyer connecter pour avoir la possibilité de voter</h1>
-            <h3 class='error' align='center'>voici les résultats des votes actuelles</h3>
-            <table border="2">
-                <tr align=center>
-                    <td>titre du film</td>
-                    <td>nombre de vote</td>
-                </tr>
-                <?php $request = $BDD->query("SELECT `nom`, `nb_vote` FROM `film`");
-                while ($data = $request->fetch()) { ?>
-                    <tr>
-                        <td>
-                            <?php echo $data['nom']; ?>
-                        </td>
-                        <td>
-                            <?php echo $data['nb_vote']; ?>
-                        </td>
-                    </tr>
-                <?php } ?>
-            </table>
+            </div>
 
 
 
