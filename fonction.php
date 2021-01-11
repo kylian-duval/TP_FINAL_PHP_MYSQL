@@ -88,7 +88,6 @@ function inscription($identifiant, $password, $BDD)
 
 
     $roquette = ("INSERT INTO `user`(`identifiant`, `password`, `ADMIN` ,`vote`) VALUES ('$identifiant','$password','false', 'non') ");
-    echo $roquette;
     $BDD->query("$roquette");
 }
 
