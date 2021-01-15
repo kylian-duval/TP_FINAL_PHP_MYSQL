@@ -137,7 +137,7 @@ function connectionbdd()
 
 function contact($nom, $prénom, $mail, $message, $BDD)
 {
-    $roquette = ("INSERT INTO `Contact`(`nom`, `prénom`, `mail`,`message`) VALUES ('$nom','$prénom','$mail','$message') ");
+    $roquette = ("INSERT INTO `contact`(`nom`, `prénom`, `mail`,`message`) VALUES ('$nom','$prénom','$mail','$message') ");
     $BDD->query("$roquette");
 }
 
