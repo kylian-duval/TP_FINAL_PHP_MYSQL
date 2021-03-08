@@ -86,6 +86,14 @@
                 return "mailInvalide";
             }
         }
+        public function conactat () {
+
+
+
+
+
+
+        }
 
         public function errorGestion($erreur)
         {
@@ -125,4 +133,3 @@
             }
         }
     }
-?>
